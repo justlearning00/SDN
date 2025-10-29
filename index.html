@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillLink Namibia - Bridge Your Future</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                SkillLink <span>Namibia</span>
+            </a>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#features">Features</a>
+                <a href="#courses">Courses</a>
+                <a href="register.html" class="btn btn-primary">Get Started</a>
+            </div>
+            <button class="mobile-menu-btn" id="mobile-menu-btn">
+                Menu
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Unlock Your Future</h1>
+        <p>Bridge the gap between education and employment</p>
+        
+        <div class="hero-stats">
+            <div class="stat">
+                <span class="stat-number">46.8%</span>
+                <span class="stat-label">Youth Unemployment in Namibia</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">5,000+</span>
+                <span class="stat-label">Free Courses Available</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">100+</span>
+                <span class="stat-label">Industry Mentors</span>
+            </div>
+        </div>
+
+        <div class="cta-buttons">
+            <a href="register.html" class="btn btn-primary btn-large">Get Started Free</a>
+            <a href="#features" class="btn btn-secondary btn-large">Learn More</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2>How SkillLink Works</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">Learn</div>
+                    <h3>Learn</h3>
+                    <p>Access thousands of free online courses from top platforms like Coursera, edX, and LinkedIn Learning. All curated for Namibian job market needs.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">Connect</div>
+                    <h3>Connect</h3>
+                    <p>Find experienced mentors in your field who can guide your career journey. Network with professionals and peers to expand opportunities.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">Certify</div>
+                    <h3>Certify</h3>
+                    <p>Earn recognized certificates upon course completion. Showcase your new skills to potential employers and boost your employability.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Courses -->
+    <section id="courses" class="courses-preview">
+        <div class="container">
+            <h2>Featured Courses</h2>
+            <div class="courses-container" id="home-courses">
+                <!-- Courses will be loaded by JavaScript -->
+            </div>
+            <div class="text-center mt-3">
+                <a href="courses.html" class="btn btn-primary btn-large">Browse All Courses</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Stories -->
+    <section class="success-stories">
+        <div class="container">
+            <h2>Success Stories</h2>
+            <div class="stories-grid">
+                <div class="story-card">
+                    <p class="story-quote">"SkillLink helped me transition from unemployment to a data analyst role at Bank Windhoek in just 4 months. The mentorship program was invaluable!"</p>
+                    <p class="story-author">- John Katuta, Data Analyst</p>
+                </div>
+                <div class="story-card">
+                    <p class="story-quote">"I learned digital marketing skills that helped me start my own freelance business. Now I have 5 regular clients and growing!"</p>
+                    <p class="story-author">- Maria Shilongo, Digital Marketer</p>
+                </div>
+                <div class="story-card">
+                    <p class="story-quote">"The free courses and certificates gave me the confidence to apply for jobs. I'm now working as a junior developer at a tech startup."</p>
+                    <p class="story-author">- David Nghipunya, Software Developer</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>Ready to Transform Your Career?</h2>
+        <p>Join thousands of Namibian youth building their future today</p>
+        <a href="register.html" class="btn btn-secondary btn-large">Start Learning Now - It's Free!</a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About SkillLink</h3>
+                <p>Empowering Namibian youth through accessible education and mentorship opportunities.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="courses.html">Browse Courses</a></li>
+                    <li><a href="mentors.html">Find Mentors</a></li>
+                    <li><a href="jobs.html">Job Board</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                    <li><a href="#privacy">Privacy Policy</a></li>
+                    <li><a href="#terms">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: info@skilllink.na</p>
+                <p>Phone: +264 61 123 4567</p>
+                <p>Location: Windhoek, Namibia</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 SkillLink Namibia. All rights reserved. | A Project by NUST SDN621S Team</p>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+    <script>
+        // Load featured courses on homepage
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.getElementById('home-courses');
+            if (container) {
+                const courses = DataManager.getCourses().slice(0, 4);
+                container.innerHTML = courses.map(function(course) {
+                    return UI.renderCourseCard(course);
+                }).join('');
+            }
+        });
+    </script>
+</body>
+</html>

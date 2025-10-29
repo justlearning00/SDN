@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - SkillLink Namibia</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                SkillLink <span style="color: var(--secondary);">Namibia</span>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="dashboard.html" class="active">
+                    Dashboard
+                </a></li>
+                <li><a href="courses.html">
+                    Browse Courses
+                </a></li>
+                <li><a href="my-learning.html">
+                    My Learning
+                </a></li>
+                <li><a href="mentors.html">
+                    Find Mentors
+                </a></li>
+                <li><a href="jobs.html">
+                    Job Board
+                </a></li>
+                <li><a href="certificates.html">
+                    My Certificates
+                </a></li>
+                <li><a href="#" id="logout-btn">
+                    Logout
+                </a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <div>
+                    <h1 id="welcome-message" style="color: var(--primary); margin: 0;">Welcome back!</h1>
+                    <p style="color: var(--dark-gray); margin: 0.5rem 0 0 0;">Your learning journey continues</p>
+                </div>
+                <div style="display: flex; gap: 1rem; align-items: center;">
+                    <button style="background: none; border: none; font-size: 1.5rem; cursor: pointer; position: relative;">
+                        Notifications
+                        <span style="position: absolute; top: -5px; right: -5px; background: var(--danger); color: white; border-radius: 50%; width: 20px; height: 20px; font-size: 0.7rem; display: flex; align-items: center; justify-content: center;">3</span>
+                    </button>
+                    <div style="width: 40px; height: 40px; background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer;">
+                        JD
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="dashboard-grid">
+                <div class="stat-widget">
+                    
+                    <div class="stat-info">
+                        <h3 id="stat-courses">3</h3>
+                        <p>Courses Enrolled</p>
+                    </div>
+                </div>
+                <div class="stat-widget">
+                    
+                    <div class="stat-info">
+                        <h3 id="stat-completed">1</h3>
+                        <p>Completed</p>
+                    </div>
+                </div>
+                <div class="stat-widget">
+                    
+                    <div class="stat-info">
+                        <h3 id="stat-certificates">1</h3>
+                        <p>Certificates</p>
+                    </div>
+                </div>
+                <div class="stat-widget">
+                    <div class="stat-info">
+                        <h3 id="stat-hours">24</h3>
+                        <p>Hours Learned</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Continue Learning Section -->
+            <section style="margin-bottom: 3rem;">
+                <h2 style="color: var(--primary); margin-bottom: 1.5rem;">Continue Learning</h2>
+                <div id="enrolled-courses" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 style="color: var(--primary); margin-bottom: 1rem;">Digital Marketing Fundamentals</h3>
+                            <div style="background: var(--light-gray); height: 6px; border-radius: 3px; margin-bottom: 1rem;">
+                                <div style="background: var(--success); height: 100%; width: 65%; border-radius: 3px;"></div>
+                            </div>
+                            <p style="color: var(--dark-gray); margin-bottom: 1rem;">65% complete • 4 weeks</p>
+                            <button class="btn btn-primary btn-block">Continue Learning</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 style="color: var(--primary); margin-bottom: 1rem;">Web Development Basics</h3>
+                            <div style="background: var(--light-gray); height: 6px; border-radius: 3px; margin-bottom: 1rem;">
+                                <div style="background: var(--success); height: 100%; width: 30%; border-radius: 3px;"></div>
+                            </div>
+                            <p style="color: var(--dark-gray); margin-bottom: 1rem;">30% complete • 8 weeks</p>
+                            <button class="btn btn-primary btn-block">Continue Learning</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recommended Courses -->
+            <section style="margin-bottom: 3rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <h2 style="color: var(--primary); margin: 0;">Recommended For You</h2>
+                    <a href="courses.html" style="color: var(--primary); text-decoration: none; font-weight: 600;">View All →</a>
+                </div>
+                <div id="recommended-courses" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 style="color: var(--primary); margin-bottom: 0.5rem;">Data Analysis with Python</h3>
+                            <p style="color: var(--dark-gray); margin-bottom: 1rem;">Learn data analysis and visualization</p>
+                            <div style="display: flex; justify-content: space-between; color: var(--dark-gray); font-size: 0.9rem; margin-bottom: 1rem;">
+                                <span>6 weeks</span>
+                                <span>Intermediate</span>
+                            </div>
+                            <button class="btn btn-primary btn-block">Enroll Now</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 style="color: var(--primary); margin-bottom: 0.5rem;">Business Communication</h3>
+                            <p style="color: var(--dark-gray); margin-bottom: 1rem;">Professional communication skills</p>
+                            <div style="display: flex; justify-content: space-between; color: var(--dark-gray); font-size: 0.9rem; margin-bottom: 1rem;">
+                                <span>3 weeks</span>
+                                <span>Beginner</span>
+                            </div>
+                            <button class="btn btn-primary btn-block">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Job Opportunities -->
+            <section style="margin-bottom: 3rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <h2 style="color: var(--primary); margin: 0;">New Job Opportunities</h2>
+                    <a href="jobs.html" style="color: var(--primary); text-decoration: none; font-weight: 600;">View All →</a>
+                </div>
+                <div id="job-opportunities" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 style="color: var(--primary); margin-bottom: 0.5rem;">Junior Web Developer</h3>
+                            <p style="color: var(--dark-gray); margin-bottom: 1rem;">Tech Solutions Namibia</p>
+                            <div style="display: flex; gap: 1rem; color: var(--dark-gray); font-size: 0.9rem; margin-bottom: 1rem;">
+                                <span>Windhoek</span>
+                                <span>Full-time</span>
+                            </div>
+                            <button class="btn btn-primary btn-block">Apply Now</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 style="color: var(--primary); margin-bottom: 0.5rem;">Marketing Intern</h3>
+                            <p style="color: var(--dark-gray); margin-bottom: 1rem;">Namibia Business Hub</p>
+                            <div style="display: flex; gap: 1rem; color: var(--dark-gray); font-size: 0.9rem; margin-bottom: 1rem;">
+                                <span>Remote</span>
+                                <span>Part-time</span>
+                            </div>
+                            <button class="btn btn-primary btn-block">Apply Now</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quick Actions -->
+            <section>
+                <h2 style="color: var(--primary); margin-bottom: 1.5rem;">Quick Actions</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                    <a href="mentors.html" class="card" style="text-decoration: none; cursor: pointer;">
+                        <div class="card-body" style="text-align: center;">
+                            <h3 style="color: var(--primary); margin: 0;">Find a Mentor</h3>
+                            <p style="color: var(--dark-gray); margin: 0.5rem 0 0 0; font-size: 0.9rem;">Connect with professionals</p>
+                        </div>
+                    </a>
+                    <a href="courses.html" class="card" style="text-decoration: none; cursor: pointer;">
+                        <div class="card-body" style="text-align: center;">
+                            <h3 style="color: var(--primary); margin: 0;">Explore Courses</h3>
+                            <p style="color: var(--dark-gray); margin: 0.5rem 0 0 0; font-size: 0.9rem;">Discover new skills</p>
+                        </div>
+                    </a>
+                    <a href="certificates.html" class="card" style="text-decoration: none; cursor: pointer;">
+                        <div class="card-body" style="text-align: center;">
+                            <h3 style="color: var(--primary); margin: 0;">My Certificates</h3>
+                            <p style="color: var(--dark-gray); margin: 0.5rem 0 0 0; font-size: 0.9rem;">View achievements</p>
+                        </div>
+                    </a>
+                    <a href="jobs.html" class="card" style="text-decoration: none; cursor: pointer;">
+                        <div class="card-body" style="text-align: center;">
+                            <h3 style="color: var(--primary); margin: 0;">Find Jobs</h3>
+                            <p style="color: var(--dark-gray); margin: 0.5rem 0 0 0; font-size: 0.9rem;">Explore opportunities</p>
+                        </div>
+                    </a>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Simple dashboard functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Simple logout functionality
+            document.getElementById('logout-btn').addEventListener('click', function(e) {
+                e.preventDefault();
+                if (confirm('Are you sure you want to log out?')) {
+                    alert('Logged out successfully');
+                    window.location.href = 'index.html';
+                }
+            });
+
+            // Add basic interactivity to buttons
+            document.querySelectorAll('.btn-primary').forEach(button => {
+                button.addEventListener('click', function() {
+                    if (this.textContent.includes('Enroll') || this.textContent.includes('Apply')) {
+                        alert('Action completed! This would navigate to the relevant page in a real application.');
+                    } else if (this.textContent.includes('Continue')) {
+                        alert('Taking you to the course content...');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
