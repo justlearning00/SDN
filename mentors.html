@@ -5,6 +5,342 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Find Mentors - SkillLink Namibia</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Enhanced Mentors Page Styles */
+    .page-header {
+      margin-bottom: 2rem;
+    }
+
+    .page-header h1 {
+      color: var(--primary-blue);
+      margin-bottom: 0.5rem;
+    }
+
+    .page-subtitle {
+      color: var(--dark-gray);
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    /* Search and Filter Section */
+    .search-filter-section {
+      background: var(--white);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+    }
+
+    .search-bar {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .search-input {
+      flex: 1;
+      min-width: 250px;
+      padding: 0.8rem 1.2rem;
+      border: 2px solid var(--light-gray);
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--primary-blue);
+    }
+
+    .search-btn {
+      padding: 0.8rem 2rem;
+      background: var(--primary-blue);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .search-btn:hover {
+      background: #1E40AF;
+      transform: translateY(-2px);
+    }
+
+    /* Filter Section */
+    .filter-section {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .filter-label {
+      font-weight: 600;
+      color: var(--dark-gray);
+    }
+
+    .filter-tags {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      flex: 1;
+    }
+
+    .filter-tag {
+      padding: 0.5rem 1rem;
+      border: 2px solid var(--light-gray);
+      border-radius: 20px;
+      background: var(--white);
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--dark-gray);
+    }
+
+    .filter-tag:hover {
+      border-color: var(--primary-blue);
+      background: var(--light-gray);
+    }
+
+    .filter-tag.active {
+      background: var(--primary-blue);
+      color: var(--white);
+      border-color: var(--primary-blue);
+    }
+
+    /* Stats Overview */
+    .stats-overview {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, var(--primary-blue), #1E40AF);
+      color: var(--white);
+      padding: 1.5rem;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .stat-card h3 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-card p {
+      opacity: 0.9;
+      margin: 0;
+    }
+
+    /* Mentors Grid */
+    .mentors-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    /* Mentor Card */
+    .mentor-card {
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .mentor-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      border-color: var(--secondary-teal);
+    }
+
+    .mentor-header {
+      background: linear-gradient(135deg, var(--primary-blue), var(--secondary-teal));
+      padding: 2rem 1.5rem 1rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .mentor-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      margin: 0 auto 1rem;
+      border: 4px solid var(--white);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .mentor-name {
+      color: var(--white);
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .mentor-title {
+      color: var(--white);
+      font-size: 0.95rem;
+      opacity: 0.95;
+    }
+
+    .mentor-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.4rem 0.8rem;
+      background: var(--accent-yellow);
+      color: var(--dark-gray);
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .mentor-content {
+      padding: 1.5rem;
+    }
+
+    .mentor-bio {
+      color: var(--dark-gray);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .mentor-expertise {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .expertise-tag {
+      padding: 0.3rem 0.7rem;
+      background: var(--light-gray);
+      border-radius: 15px;
+      font-size: 0.8rem;
+      color: var(--dark-gray);
+    }
+
+    .mentor-stats {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+      padding: 1rem 0;
+      border-top: 1px solid var(--light-gray);
+      border-bottom: 1px solid var(--light-gray);
+    }
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--dark-gray);
+    }
+
+    .mentor-actions {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .btn-connect {
+      flex: 1;
+      padding: 0.75rem 1.5rem;
+      background: var(--secondary-teal);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 0.95rem;
+    }
+
+    .btn-connect:hover {
+      background: var(--primary-blue);
+      transform: translateY(-2px);
+    }
+
+    .btn-profile {
+      padding: 0.75rem 1rem;
+      background: var(--white);
+      color: var(--primary-blue);
+      border: 2px solid var(--primary-blue);
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 0.95rem;
+    }
+
+    .btn-profile:hover {
+      background: var(--light-gray);
+      transform: translateY(-2px);
+    }
+
+    /* Availability Badge */
+    .availability {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 0.8rem;
+      background: #dcfce7;
+      color: #166534;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .availability.busy {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .availability-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #22c55e;
+    }
+
+    .availability.busy .availability-dot {
+      background: #f59e0b;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .mentors-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .search-bar {
+        flex-direction: column;
+      }
+
+      .search-input {
+        min-width: 100%;
+      }
+
+      .stats-overview {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="dashboard-container">
@@ -18,29 +354,448 @@
         <li><a href="my-learning.html">My Learning</a></li>
         <li><a href="mentors.html" class="active">Find Mentors</a></li>
         <li><a href="jobs.html">Job Board</a></li>
+        <li><a href="certificates.html">My Certificates</a></li>
       </ul>
     </aside>
 
     <main class="main-content">
-      <h1>Our Mentors</h1>
-      <div class="card-grid">
-        <div class="card">
-          <h3>Sarah Amadhila</h3>
-          <p>Web Development Expert</p>
-          <button class="btn-primary">Connect</button>
+      <div class="page-header">
+        <h1>Find Mentors</h1>
+        <p class="page-subtitle">Connect with experienced professionals in Namibia who can guide your career journey</p>
+      </div>
+
+      <!-- Stats Overview -->
+      <div class="stats-overview">
+        <div class="stat-card">
+          <h3>50+</h3>
+          <p>Active Mentors</p>
         </div>
-        <div class="card">
-          <h3>John Shilongo</h3>
-          <p>Data Science Specialist</p>
-          <button class="btn-primary">Connect</button>
+        <div class="stat-card">
+          <h3>15+</h3>
+          <p>Industries</p>
         </div>
-        <div class="card">
-          <h3>Elena Uushona</h3>
-          <p>Career Coach</p>
-          <button class="btn-primary">Connect</button>
+        <div class="stat-card">
+          <h3>200+</h3>
+          <p>Success Stories</p>
+        </div>
+      </div>
+
+      <!-- Search and Filter Section -->
+      <div class="search-filter-section">
+        <div class="search-bar">
+          <input 
+            type="text" 
+            class="search-input" 
+            id="mentorSearch" 
+            placeholder="Search mentors by name, expertise, or industry..."
+          >
+          <button class="search-btn" onclick="searchMentors()">Search</button>
+        </div>
+
+        <div class="filter-section">
+          <span class="filter-label">Industry:</span>
+          <div class="filter-tags">
+            <div class="filter-tag active" onclick="filterByIndustry('all')">All</div>
+            <div class="filter-tag" onclick="filterByIndustry('technology')">Technology</div>
+            <div class="filter-tag" onclick="filterByIndustry('business')">Business</div>
+            <div class="filter-tag" onclick="filterByIndustry('marketing')">Marketing</div>
+            <div class="filter-tag" onclick="filterByIndustry('design')">Design</div>
+            <div class="filter-tag" onclick="filterByIndustry('engineering')">Engineering</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mentors Grid -->
+      <div class="mentors-grid" id="mentorsGrid">
+        <!-- Mentor Card 1 -->
+        <div class="mentor-card" data-industry="technology">
+          <div class="mentor-header">
+            <span class="mentor-badge">⭐ Top Rated</span>
+            <div class="mentor-avatar">👩‍💻</div>
+            <h3 class="mentor-name">Sarah Amadhila</h3>
+            <p class="mentor-title">Senior Web Developer</p>
+          </div>
+          <div class="mentor-content">
+            <div class="availability">
+              <span class="availability-dot"></span>
+              Available
+            </div>
+            <p class="mentor-bio">
+              10+ years building web applications. Passionate about mentoring young developers in Namibia.
+            </p>
+            <div class="mentor-expertise">
+              <span class="expertise-tag">JavaScript</span>
+              <span class="expertise-tag">React</span>
+              <span class="expertise-tag">Node.js</span>
+              <span class="expertise-tag">Career Guidance</span>
+            </div>
+            <div class="mentor-stats">
+              <div class="stat-item">
+                <span>👥</span>
+                <span>25 Mentees</span>
+              </div>
+              <div class="stat-item">
+                <span>⭐</span>
+                <span>4.9/5.0</span>
+              </div>
+            </div>
+            <div class="mentor-actions">
+              <button class="btn-connect" onclick="connectWithMentor('Sarah Amadhila')">Connect</button>
+              <button class="btn-profile" onclick="viewProfile('Sarah Amadhila')">Profile</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mentor Card 2 -->
+        <div class="mentor-card" data-industry="business">
+          <div class="mentor-header">
+            <div class="mentor-avatar">👨‍💼</div>
+            <h3 class="mentor-name">John Shilongo</h3>
+            <p class="mentor-title">Data Science Manager</p>
+          </div>
+          <div class="mentor-content">
+            <div class="availability">
+              <span class="availability-dot"></span>
+              Available
+            </div>
+            <p class="mentor-bio">
+              Data scientist with experience in finance and business analytics. Love helping students break into tech.
+            </p>
+            <div class="mentor-expertise">
+              <span class="expertise-tag">Python</span>
+              <span class="expertise-tag">Data Analysis</span>
+              <span class="expertise-tag">Machine Learning</span>
+            </div>
+            <div class="mentor-stats">
+              <div class="stat-item">
+                <span>👥</span>
+                <span>18 Mentees</span>
+              </div>
+              <div class="stat-item">
+                <span>⭐</span>
+                <span>4.8/5.0</span>
+              </div>
+            </div>
+            <div class="mentor-actions">
+              <button class="btn-connect" onclick="connectWithMentor('John Shilongo')">Connect</button>
+              <button class="btn-profile" onclick="viewProfile('John Shilongo')">Profile</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mentor Card 3 -->
+        <div class="mentor-card" data-industry="marketing">
+          <div class="mentor-header">
+            <span class="mentor-badge">⭐ Top Rated</span>
+            <div class="mentor-avatar">👩‍💼</div>
+            <h3 class="mentor-name">Elena Uushona</h3>
+            <p class="mentor-title">Career Coach & HR Specialist</p>
+          </div>
+          <div class="mentor-content">
+            <div class="availability busy">
+              <span class="availability-dot"></span>
+              Limited Availability
+            </div>
+            <p class="mentor-bio">
+              HR professional specializing in career development and interview preparation for graduates.
+            </p>
+            <div class="mentor-expertise">
+              <span class="expertise-tag">Career Coaching</span>
+              <span class="expertise-tag">Resume Writing</span>
+              <span class="expertise-tag">Interviews</span>
+            </div>
+            <div class="mentor-stats">
+              <div class="stat-item">
+                <span>👥</span>
+                <span>40 Mentees</span>
+              </div>
+              <div class="stat-item">
+                <span>⭐</span>
+                <span>5.0/5.0</span>
+              </div>
+            </div>
+            <div class="mentor-actions">
+              <button class="btn-connect" onclick="connectWithMentor('Elena Uushona')">Connect</button>
+              <button class="btn-profile" onclick="viewProfile('Elena Uushona')">Profile</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mentor Card 4 -->
+        <div class="mentor-card" data-industry="design">
+          <div class="mentor-header">
+            <div class="mentor-avatar">👨‍🎨</div>
+            <h3 class="mentor-name">David Nghipunya</h3>
+            <p class="mentor-title">UX/UI Designer</p>
+          </div>
+          <div class="mentor-content">
+            <div class="availability">
+              <span class="availability-dot"></span>
+              Available
+            </div>
+            <p class="mentor-bio">
+              Creative designer with 8 years experience. Helping aspiring designers build stunning portfolios.
+            </p>
+            <div class="mentor-expertise">
+              <span class="expertise-tag">UI Design</span>
+              <span class="expertise-tag">Figma</span>
+              <span class="expertise-tag">User Research</span>
+              <span class="expertise-tag">Portfolio</span>
+            </div>
+            <div class="mentor-stats">
+              <div class="stat-item">
+                <span>👥</span>
+                <span>15 Mentees</span>
+              </div>
+              <div class="stat-item">
+                <span>⭐</span>
+                <span>4.7/5.0</span>
+              </div>
+            </div>
+            <div class="mentor-actions">
+              <button class="btn-connect" onclick="connectWithMentor('David Nghipunya')">Connect</button>
+              <button class="btn-profile" onclick="viewProfile('David Nghipunya')">Profile</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mentor Card 5 -->
+        <div class="mentor-card" data-industry="marketing">
+          <div class="mentor-header">
+            <div class="mentor-avatar">👩‍💼</div>
+            <h3 class="mentor-name">Maria Shilongo</h3>
+            <p class="mentor-title">Digital Marketing Specialist</p>
+          </div>
+          <div class="mentor-content">
+            <div class="availability">
+              <span class="availability-dot"></span>
+              Available
+            </div>
+            <p class="mentor-bio">
+              Marketing expert helping businesses grow online. Mentor for digital marketing and social media strategy.
+            </p>
+            <div class="mentor-expertise">
+              <span class="expertise-tag">SEO</span>
+              <span class="expertise-tag">Social Media</span>
+              <span class="expertise-tag">Content Strategy</span>
+            </div>
+            <div class="mentor-stats">
+              <div class="stat-item">
+                <span>👥</span>
+                <span>22 Mentees</span>
+              </div>
+              <div class="stat-item">
+                <span>⭐</span>
+                <span>4.9/5.0</span>
+              </div>
+            </div>
+            <div class="mentor-actions">
+              <button class="btn-connect" onclick="connectWithMentor('Maria Shilongo')">Connect</button>
+              <button class="btn-profile" onclick="viewProfile('Maria Shilongo')">Profile</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mentor Card 6 -->
+        <div class="mentor-card" data-industry="engineering">
+          <div class="mentor-header">
+            <div class="mentor-avatar">👨‍🔧</div>
+            <h3 class="mentor-name">Thomas Mwiya</h3>
+            <p class="mentor-title">Network Engineer</p>
+          </div>
+          <div class="mentor-content">
+            <div class="availability">
+              <span class="availability-dot"></span>
+              Available
+            </div>
+            <p class="mentor-bio">
+              Networking specialist with Cisco certifications. Guiding students toward IT infrastructure careers.
+            </p>
+            <div class="mentor-expertise">
+              <span class="expertise-tag">Networking</span>
+              <span class="expertise-tag">Cisco</span>
+              <span class="expertise-tag">Security</span>
+              <span class="expertise-tag">Certifications</span>
+            </div>
+            <div class="mentor-stats">
+              <div class="stat-item">
+                <span>👥</span>
+                <span>12 Mentees</span>
+              </div>
+              <div class="stat-item">
+                <span>⭐</span>
+                <span>4.6/5.0</span>
+              </div>
+            </div>
+            <div class="mentor-actions">
+              <button class="btn-connect" onclick="connectWithMentor('Thomas Mwiya')">Connect</button>
+              <button class="btn-profile" onclick="viewProfile('Thomas Mwiya')">Profile</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mentor Card 7 -->
+        <div class="mentor-card" data-industry="business">
+          <div class="mentor-header">
+            <span class="mentor-badge">⭐ Top Rated</span>
+            <div class="mentor-avatar">👨‍💼</div>
+            <h3 class="mentor-name">Peter Katuta</h3>
+            <p class="mentor-title">Business Consultant</p>
+          </div>
+          <div class="mentor-content">
+            <div class="availability">
+              <span class="availability-dot"></span>
+              Available
+            </div>
+            <p class="mentor-bio">
+              Entrepreneur and consultant helping young Namibians start and grow their businesses successfully.
+            </p>
+            <div class="mentor-expertise">
+              <span class="expertise-tag">Entrepreneurship</span>
+              <span class="expertise-tag">Business Planning</span>
+              <span class="expertise-tag">Funding</span>
+            </div>
+            <div class="mentor-stats">
+              <div class="stat-item">
+                <span>👥</span>
+                <span>30 Mentees</span>
+              </div>
+              <div class="stat-item">
+                <span>⭐</span>
+                <span>4.9/5.0</span>
+              </div>
+            </div>
+            <div class="mentor-actions">
+              <button class="btn-connect" onclick="connectWithMentor('Peter Katuta')">Connect</button>
+              <button class="btn-profile" onclick="viewProfile('Peter Katuta')">Profile</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mentor Card 8 -->
+        <div class="mentor-card" data-industry="technology">
+          <div class="mentor-header">
+            <div class="mentor-avatar">👩‍💻</div>
+            <h3 class="mentor-name">Anna Shikongo</h3>
+            <p class="mentor-title">Mobile App Developer</p>
+          </div>
+          <div class="mentor-content">
+            <div class="availability busy">
+              <span class="availability-dot"></span>
+              Limited Availability
+            </div>
+            <p class="mentor-bio">
+              Mobile developer specializing in Android and iOS. Passionate about teaching app development to beginners.
+            </p>
+            <div class="mentor-expertise">
+              <span class="expertise-tag">Android</span>
+              <span class="expertise-tag">Flutter</span>
+              <span class="expertise-tag">Mobile UX</span>
+            </div>
+            <div class="mentor-stats">
+              <div class="stat-item">
+                <span>👥</span>
+                <span>20 Mentees</span>
+              </div>
+              <div class="stat-item">
+                <span>⭐</span>
+                <span>4.8/5.0</span>
+              </div>
+            </div>
+            <div class="mentor-actions">
+              <button class="btn-connect" onclick="connectWithMentor('Anna Shikongo')">Connect</button>
+              <button class="btn-profile" onclick="viewProfile('Anna Shikongo')">Profile</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mentor Card 9 -->
+        <div class="mentor-card" data-industry="design">
+          <div class="mentor-header">
+            <div class="mentor-avatar">👨‍🎨</div>
+            <h3 class="mentor-name">Michael Hamunyela</h3>
+            <p class="mentor-title">Graphic Designer</p>
+          </div>
+          <div class="mentor-content">
+            <div class="availability">
+              <span class="availability-dot"></span>
+              Available
+            </div>
+            <p class="mentor-bio">
+              Creative designer with expertise in branding and visual identity. Mentoring aspiring graphic designers.
+            </p>
+            <div class="mentor-expertise">
+              <span class="expertise-tag">Adobe Suite</span>
+              <span class="expertise-tag">Branding</span>
+              <span class="expertise-tag">Typography</span>
+            </div>
+            <div class="mentor-stats">
+              <div class="stat-item">
+                <span>👥</span>
+                <span>14 Mentees</span>
+              </div>
+              <div class="stat-item">
+                <span>⭐</span>
+                <span>4.7/5.0</span>
+              </div>
+            </div>
+            <div class="mentor-actions">
+              <button class="btn-connect" onclick="connectWithMentor('Michael Hamunyela')">Connect</button>
+              <button class="btn-profile" onclick="viewProfile('Michael Hamunyela')">Profile</button>
+            </div>
+          </div>
         </div>
       </div>
     </main>
   </div>
+
+  <script>
+    // Search functionality
+    function searchMentors() {
+      const searchTerm = document.getElementById('mentorSearch').value.toLowerCase();
+      const cards = document.querySelectorAll('.mentor-card');
+      
+      cards.forEach(card => {
+        const name = card.querySelector('.mentor-name').textContent.toLowerCase();
+        const title = card.querySelector('.mentor-title').textContent.toLowerCase();
+        const bio = card.querySelector('.mentor-bio').textContent.toLowerCase();
+        const tags = Array.from(card.querySelectorAll('.expertise-tag')).map(tag => tag.textContent.toLowerCase()).join(' ');
+        
+        if (name.includes(searchTerm) || title.includes(searchTerm) || bio.includes(searchTerm) || tags.includes(searchTerm)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Filter by industry
+    function filterByIndustry(industry) {
+      // Update active state
+      document.querySelectorAll('.filter-tag').forEach(tag => tag.classList.remove('active'));
+      event.target.classList.add('active');
+      
+      const cards = document.querySelectorAll('.mentor-card');
+      
+      cards.forEach(card => {
+        const cardIndustry = card.getAttribute('data-industry');
+        if (industry === 'all' || cardIndustry === industry) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Connect with mentor
+    function connectWithMentor(mentorName) {
+      alert('Connection Request Sent!\n\n' + mentorName + ' will review your profile and respond within 24-48 hours.\n\n✓ Check your email for updates\n✓ Prepare questions for your first meeting\n✓ Review their expertise areas');
+    }
+
+    // View mentor profile
+    function viewProfile(mentorName) {
+      alert('Viewing Full Profile: ' + mentorName + '\n\nIn a full implementation, this would show:\n• Detailed bio and experience\n• Education and certifications\n• Success stories from mentees\n• Available time slots\n• Reviews and ratings');
+    }
+  </script>
 </body>
 </html>
