@@ -1,46 +1,349 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Find Mentors - SkillLink Namibia</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Mentors - SkillLink Namibia</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="dashboard-container">
-    <aside class="sidebar">
-      <div class="sidebar-logo">
-        SkillLink <span style="color: var(--secondary-teal);">Namibia</span>
-      </div>
-      <ul class="sidebar-menu">
-        <li><a href="dashboard.html">Dashboard</a></li>
-        <li><a href="courses.html">Browse Courses</a></li>
-        <li><a href="my-learning.html">My Learning</a></li>
-        <li><a href="mentors.html" class="active">Find Mentors</a></li>
-        <li><a href="job-board.html">Job Board</a></li>
-      </ul>
-    </aside>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                SkillLink <span>Namibia</span>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="courses.html">Browse Courses</a></li>
+                <li><a href="my-learning.html">My Learning</a></li>
+                <li><a href="mentors.html" class="active">Find Mentors</a></li>
+                <li><a href="jobs.html">Job Board</a></li>
+                <li><a href="certificates.html">My Certificates</a></li>
+                <li><a href="profile.html">Settings</a></li>
+                <li><a href="#" id="logout-btn">Logout</a></li>
+            </ul>
+        </aside>
 
-    <main class="main-content">
-      <h1>Our Mentors</h1>
-      <div class="card-grid">
-        <div class="card">
-          <h3>Sarah Amadhila</h3>
-          <p>Web Development Expert</p>
-          <button class="btn-primary">Connect</button>
-        </div>
-        <div class="card">
-          <h3>John Shilongo</h3>
-          <p>Data Science Specialist</p>
-          <button class="btn-primary">Connect</button>
-        </div>
-        <div class="card">
-          <h3>Elena Uushona</h3>
-          <p>Career Coach</p>
-          <button class="btn-primary">Connect</button>
-        </div>
-      </div>
-    </main>
-  </div>
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <div>
+                    <h1 style="color: var(--primary-blue); margin: 0;">Find Mentors</h1>
+                    <p style="color: var(--dark-gray); margin: 0.5rem 0 0 0;">Connect with experienced professionals in your field</p>
+                </div>
+                <div style="display: flex; gap: 1rem;">
+                    <input type="text" placeholder="Search mentors..." style="padding: 0.75rem; border: 2px solid var(--light-gray); border-radius: 8px; width: 300px;">
+                    <button class="btn btn-primary">Search</button>
+                </div>
+            </div>
+
+            <!-- Filter Section -->
+            <div style="background: var(--white); padding: 1.5rem; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); margin-bottom: 2rem;">
+                <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+                    <span style="font-weight: 600; color: var(--dark-gray);">Filter by:</span>
+                    
+                    <select style="padding: 0.5rem; border: 2px solid var(--light-gray); border-radius: 6px;">
+                        <option>All Industries</option>
+                        <option>IT & Technology</option>
+                        <option>Business & Finance</option>
+                        <option>Education</option>
+                        <option>Engineering</option>
+                    </select>
+                    
+                    <select style="padding: 0.5rem; border: 2px solid var(--light-gray); border-radius: 6px;">
+                        <option>All Expertise</option>
+                        <option>Career Growth</option>
+                        <option>Technical Skills</option>
+                        <option>Interview Prep</option>
+                        <option>Entrepreneurship</option>
+                    </select>
+                    
+                    <label style="display: flex; align-items: center; gap: 0.5rem;">
+                        <input type="checkbox" checked>
+                        <span>Available Now</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Mentors Grid -->
+            <div class="mentors-grid">
+                <!-- Mentor 1 -->
+                <div class="card">
+                    <div class="card-body">
+                        <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                            <div style="width: 80px; height: 80px; background: linear-gradient(135deg, var(--primary-blue), var(--accent-yellow)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.5rem;">
+                                SM
+                            </div>
+                            <div style="flex: 1;">
+                                <h3 style="color: var(--primary-blue); margin: 0 0 0.25rem 0;">Sarah M.</h3>
+                                <p style="color: var(--dark-gray); margin: 0 0 0.5rem 0; font-size: 0.9rem;">IT Manager at Telecom Namibia</p>
+                                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                                    <span style="background: var(--light-gray); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; color: var(--dark-gray);">Career Growth</span>
+                                    <span style="background: var(--light-gray); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; color: var(--dark-gray);">Tech Skills</span>
+                                    <span style="background: var(--light-gray); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; color: var(--dark-gray);">Interview Prep</span>
+                                </div>
+                            </div>
+                            <div style="text-align: right;">
+                                <span style="background: var(--success); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">Available</span>
+                                <p style="color: var(--dark-gray); margin: 0.5rem 0 0 0; font-size: 0.8rem;">2 sessions/month</p>
+                            </div>
+                        </div>
+                        
+                        <p style="color: var(--dark-gray); line-height: 1.6; margin-bottom: 1.5rem;">
+                            "I help young professionals navigate the tech industry in Namibia. With 8 years experience at Telecom Namibia, I can guide you on career growth, technical skills development, and interview preparation."
+                        </p>
+                        
+                        <div style="display: flex; gap: 0.75rem;">
+                            <button class="btn btn-primary" style="flex: 1;" onclick="bookSession(1)">Book Session</button>
+                            <button class="btn btn-secondary" style="flex: 1;">View Profile</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mentor 2 -->
+                <div class="card">
+                    <div class="card-body">
+                        <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                            <div style="width: 80px; height: 80px; background: linear-gradient(135deg, var(--primary-blue), #14B8A6); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.5rem;">
+                                DK
+                            </div>
+                            <div style="flex: 1;">
+                                <h3 style="color: var(--primary-blue); margin: 0 0 0.25rem 0;">David K.</h3>
+                                <p style="color: var(--dark-gray); margin: 0 0 0.5rem 0; font-size: 0.9rem;">Business Consultant</p>
+                                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                                    <span style="background: var(--light-gray); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; color: var(--dark-gray);">Entrepreneurship</span>
+                                    <span style="background: var(--light-gray); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; color: var(--dark-gray);">Business Planning</span>
+                                    <span style="background: var(--light-gray); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; color: var(--dark-gray);">Funding</span>
+                                </div>
+                            </div>
+                            <div style="text-align: right;">
+                                <span style="background: var(--success); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">Available</span>
+                                <p style="color: var(--dark-gray); margin: 0.5rem 0 0 0; font-size: 0.8rem;">3 sessions/month</p>
+                            </div>
+                        </div>
+                        
+                        <p style="color: var(--dark-gray); line-height: 1.6; margin-bottom: 1.5rem;">
+                            "I specialize in helping young entrepreneurs start and grow their businesses in Namibia. From business planning to funding strategies, I provide practical guidance for success."
+                        </p>
+                        
+                        <div style="display: flex; gap: 0.75rem;">
+                            <button class="btn btn-primary" style="flex: 1;" onclick="bookSession(2)">Book Session</button>
+                            <button class="btn btn-secondary" style="flex: 1;">View Profile</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mentor 3 -->
+                <div class="card">
+                    <div class="card-body">
+                        <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                            <div style="width: 80px; height: 80px; background: linear-gradient(135deg, var(--primary-blue), #F59E0B); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.5rem;">
+                                LT
+                            </div>
+                            <div style="flex: 1;">
+                                <h3 style="color: var(--primary-blue); margin: 0 0 0.25rem 0;">Lisa T.</h3>
+                                <p style="color: var(--dark-gray); margin: 0 0 0.5rem 0; font-size: 0.9rem;">Education Specialist</p>
+                                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                                    <span style="background: var(--light-gray); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; color: var(--dark-gray);">Curriculum Design</span>
+                                    <span style="background: var(--light-gray); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; color: var(--dark-gray);">Teaching Methods</span>
+                                    <span style="background: var(--light-gray); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; color: var(--dark-gray);">EdTech</span>
+                                </div>
+                            </div>
+                            <div style="text-align: right;">
+                                <span style="background: #6B7280; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">Busy</span>
+                                <p style="color: var(--dark-gray); margin: 0.5rem 0 0 0; font-size: 0.8rem;">Available next month</p>
+                            </div>
+                        </div>
+                        
+                        <p style="color: var(--dark-gray); line-height: 1.6; margin-bottom: 1.5rem;">
+                            "As an education specialist, I help graduates transition into teaching and educational roles. I provide guidance on curriculum development and modern teaching methodologies."
+                        </p>
+                        
+                        <div style="display: flex; gap: 0.75rem;">
+                            <button class="btn btn-primary" style="flex: 1;" onclick="bookSession(3)" disabled>Not Available</button>
+                            <button class="btn btn-secondary" style="flex: 1;">View Profile</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mentor 4 -->
+                <div class="card">
+                    <div class="card-body">
+                        <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                            <div style="width: 80px; height: 80px; background: linear-gradient(135deg, var(--primary-blue), #EF4444); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.5rem;">
+                                MB
+                            </div>
+                            <div style="flex: 1;">
+                                <h3 style="color: var(--primary-blue); margin: 0 0 0.25rem 0;">Mike B.</h3>
+                                <p style="color: var(--dark-gray); margin: 0 0 0.5rem 0; font-size: 0.9rem;">Software Engineer</p>
+                                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                                    <span style="background: var(--light-gray); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; color: var(--dark-gray);">Web Development</span>
+                                    <span style="background: var(--light-gray); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; color: var(--dark-gray);">Mobile Apps</span>
+                                    <span style="background: var(--light-gray); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; color: var(--dark-gray);">Cloud Computing</span>
+                                </div>
+                            </div>
+                            <div style="text-align: right;">
+                                <span style="background: var(--success); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">Available</span>
+                                <p style="color: var(--dark-gray); margin: 0.5rem 0 0 0; font-size: 0.8rem;">4 sessions/month</p>
+                            </div>
+                        </div>
+                        
+                        <p style="color: var(--dark-gray); line-height: 1.6; margin-bottom: 1.5rem;">
+                            "Full-stack developer with 6 years experience. I mentor aspiring developers on web technologies, mobile app development, and cloud computing for the Namibian market."
+                        </p>
+                        
+                        <div style="display: flex; gap: 0.75rem;">
+                            <button class="btn btn-primary" style="flex: 1;" onclick="bookSession(4)">Book Session</button>
+                            <button class="btn btn-secondary" style="flex: 1;">View Profile</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- How It Works Section -->
+            <div style="background: var(--white); padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-top: 3rem;">
+                <h2 style="color: var(--primary-blue); text-align: center; margin-bottom: 2rem;">How Mentorship Works</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
+                    <div style="text-align: center;">
+                        <div style="width: 60px; height: 60px; background: var(--primary-blue); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-weight: bold;">1</div>
+                        <h3 style="color: var(--primary-blue); margin-bottom: 0.5rem;">Find a Mentor</h3>
+                        <p style="color: var(--dark-gray);">Browse profiles and find mentors matching your career goals</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="width: 60px; height: 60px; background: var(--primary-blue); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-weight: bold;">2</div>
+                        <h3 style="color: var(--primary-blue); margin-bottom: 0.5rem;">Book Session</h3>
+                        <p style="color: var(--dark-gray);">Schedule a 30-60 minute session at your convenience</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="width: 60px; height: 60px; background: var(--primary-blue); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-weight: bold;">3</div>
+                        <h3 style="color: var(--primary-blue); margin-bottom: 0.5rem;">Connect & Learn</h3>
+                        <p style="color: var(--dark-gray);">Video call with your mentor and get personalized guidance</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+    function bookSession(mentorId) {
+        const mentors = {
+            1: "Sarah M.",
+            2: "David K.", 
+            3: "Lisa T.",
+            4: "Mike B."
+        };
+        
+        // Simple scheduling simulation
+        const availableDates = ["Monday 10:00 AM", "Wednesday 2:00 PM", "Friday 11:00 AM"];
+        const date = availableDates[Math.floor(Math.random() * availableDates.length)];
+        
+        alert(`Session booked with ${mentors[mentorId]}!\n\n Date: ${date}\n Duration: 45 minutes\n Method: Video Call\n\nYou will receive a confirmation email with the meeting link.`);
+    }
+
+    function viewMentorProfile(mentorId) {
+        const mentorProfiles = {
+            1: {
+                name: "Sarah M.",
+                title: "IT Manager at Telecom Namibia",
+                experience: "8 years in IT management",
+                expertise: ["Career Growth", "Technical Skills", "Interview Preparation", "IT Leadership"],
+                bio: "I've been with Telecom Namibia for 8 years, starting as a junior developer and working my way up to IT Manager. I specialize in helping young professionals navigate the tech industry in Namibia, with a focus on career advancement and technical skill development.",
+                education: "BSc Computer Science - University of Namibia",
+                sessions: "2 sessions per month available",
+                specialization: "Tech Industry Career Guidance"
+            },
+            2: {
+                name: "David K.",
+                title: "Business Consultant",
+                experience: "6 years in business consulting",
+                expertise: ["Entrepreneurship", "Business Planning", "Funding Strategies", "Market Research"],
+                bio: "I've helped over 50 startups and small businesses in Namibia get off the ground. My expertise includes business model development, funding acquisition, and market strategy specifically tailored for the Namibian market.",
+                education: "MBA - Namibia University of Science and Technology",
+                sessions: "3 sessions per month available", 
+                specialization: "Entrepreneurship & Business Development"
+            }
+        };
+
+        const mentor = mentorProfiles[mentorId];
+        if (mentor) {
+            // Create profile modal
+            const profileHTML = `
+                <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000;">
+                    <div style="background: white; padding: 2rem; border-radius: 12px; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto;">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem;">
+                            <h2 style="color: var(--primary-blue); margin: 0;">${mentor.name}</h2>
+                            <button onclick="closeProfile()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--dark-gray);">&times;</button>
+                        </div>
+                        
+                        <div style="display: flex; gap: 1.5rem; margin-bottom: 1.5rem;">
+                            <div style="width: 100px; height: 100px; background: linear-gradient(135deg, var(--primary-blue), var(--accent-yellow)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 2rem;">
+                                ${mentor.name.split(' ').map(n => n[0]).join('')}
+                            </div>
+                            <div style="flex: 1;">
+                                <h3 style="color: var(--primary-blue); margin: 0 0 0.5rem 0;">${mentor.title}</h3>
+                                <p style="color: var(--dark-gray); margin: 0 0 0.5rem 0;"><strong>Experience:</strong> ${mentor.experience}</p>
+                                <p style="color: var(--dark-gray); margin: 0 0 0.5rem 0;"><strong>Education:</strong> ${mentor.education}</p>
+                                <p style="color: var(--dark-gray); margin: 0;"><strong>Availability:</strong> ${mentor.sessions}</p>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-bottom: 1.5rem;">
+                            <h4 style="color: var(--primary-blue); margin-bottom: 0.5rem;">About Me</h4>
+                            <p style="color: var(--dark-gray); line-height: 1.6;">${mentor.bio}</p>
+                        </div>
+                        
+                        <div style="margin-bottom: 1.5rem;">
+                            <h4 style="color: var(--primary-blue); margin-bottom: 0.5rem;">Areas of Expertise</h4>
+                            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                                ${mentor.expertise.map(skill => 
+                                    `<span style="background: var(--light-gray); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem; color: var(--dark-gray);">${skill}</span>`
+                                ).join('')}
+                            </div>
+                        </div>
+                        
+                        <div style="margin-bottom: 2rem;">
+                            <h4 style="color: var(--primary-blue); margin-bottom: 0.5rem;">Specialization</h4>
+                            <p style="color: var(--dark-gray);">${mentor.specialization}</p>
+                        </div>
+                        
+                        <button class="btn btn-primary btn-block" onclick="bookSession(${mentorId}); closeProfile();">Book Session with ${mentor.name}</button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.insertAdjacentHTML('beforeend', profileHTML);
+        }
+    }
+
+    function closeProfile() {
+        const modal = document.querySelector('[style*="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5)"]');
+        if (modal) {
+            modal.remove();
+        }
+    }
+
+    // Update the View Profile buttons in HTML
+    document.addEventListener('DOMContentLoaded', function() {
+        // Update all View Profile buttons to use the new function
+        const viewProfileButtons = document.querySelectorAll('.btn-secondary');
+        viewProfileButtons.forEach((button, index) => {
+            if (button.textContent.includes('View Profile')) {
+                const mentorId = Math.floor(index / 2) + 1; // Calculate mentor ID based on button position
+                button.onclick = () => viewMentorProfile(mentorId);
+            }
+        });
+
+        // Simple logout functionality
+        document.getElementById('logout-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            if (confirm('Are you sure you want to log out?')) {
+                alert('Logged out successfully');
+                window.location.href = 'index.html';
+            }
+        });
+    });
+</script>
 </body>
 </html>
