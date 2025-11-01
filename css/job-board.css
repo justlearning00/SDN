@@ -1,0 +1,128 @@
+:root {
+  --primary-blue: #1E3A8A;
+  --secondary-teal: #0F766E;
+  --accent-yellow: #F59E0B;
+  --light-gray: #F8FAFC;
+  --dark-gray: #374151;
+  --white: #FFFFFF;
+  --success: #16A34A;
+  --error: #DC2626;
+  --info: #2563EB;
+}
+
+/* Reset & base */
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color:var(--dark-gray);
+  background:var(--light-gray);
+  min-height:100vh;
+  line-height:1.5;
+}
+
+/* Topbar */
+.topbar{background:var(--white);box-shadow:0 2px 10px rgba(0,0,0,0.05);position:sticky;top:0;z-index:1000}
+.topbar-inner{max-width:1200px;margin:0 auto;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.logo{font-weight:700;color:var(--primary-blue);text-decoration:none;font-size:1.15rem}
+.logo span{color:var(--secondary-teal)}
+.top-nav .nav-link{margin-right:1rem;color:var(--dark-gray);text-decoration:none;font-weight:600}
+.top-nav .nav-link.active{color:var(--primary-blue)}
+
+/* Buttons (reused) */
+.btn{padding:0.6rem 1rem;border-radius:10px;border:none;font-weight:700;cursor:pointer;transition:all .14s ease}
+.btn-primary{background:var(--primary-blue);color:var(--white)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(30,58,138,0.15)}
+.btn-secondary{background:transparent;border:2px solid var(--primary-blue);color:var(--primary-blue)}
+.btn-secondary:hover{background:rgba(30,58,138,0.05)}
+
+/* Container */
+.container{max-width:1200px;margin:2rem auto;padding:0 2rem}
+
+/* Intro */
+.intro{text-align:center;margin-bottom:1.5rem}
+.intro h1{color:var(--primary-blue);font-size:1.9rem;font-weight:800;margin-bottom:0.35rem}
+.muted{color:var(--dark-gray);opacity:.8}
+
+/* Filters */
+.filters{background:var(--white);padding:1rem 1.25rem;border-radius:14px;box-shadow:0 6px 20px rgba(2,6,23,0.06);display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.25rem}
+.icon-bar{display:flex;gap:0.6rem;flex-wrap:wrap}
+.icon-btn{display:flex;flex-direction:column;align-items:center;gap:0.25rem;min-width:78px;padding:0.55rem;border-radius:12px;background:rgba(30,64,175,0.04);border:none;cursor:pointer;font-weight:700;color:var(--dark-gray)}
+.icon-emoji{font-size:1.3rem}
+.icon-btn:hover{transform:translateY(-2px);background:rgba(30,64,175,0.08)}
+.icon-btn.active{background:linear-gradient(90deg,var(--primary-blue),#1E40AF);color:var(--white)}
+.suggestion{margin-left:auto;color:var(--secondary-teal);font-weight:700;padding-left:1rem}
+
+/* Controls (search + dropdowns) */
+.controls{display:flex;gap:1rem;align-items:center;margin:1rem 0 1.25rem;flex-wrap:wrap}
+.search-input{flex:1;padding:0.85rem 1rem;border-radius:12px;border:2px solid rgba(30,58,138,0.12);background:var(--white);font-size:1rem;outline:none}
+.search-input:focus{box-shadow:0 6px 20px rgba(30,58,138,0.08);border-color:var(--primary-blue)}
+.controls-right{display:flex;gap:0.6rem}
+select{padding:0.8rem;border-radius:10px;border:2px solid rgba(30,58,138,0.12);background:var(--white);font-weight:700;color:var(--primary-blue)}
+select:focus{box-shadow:0 6px 20px rgba(30,58,138,0.06);outline:none}
+
+/* Results info */
+.results-info{font-weight:700;color:var(--dark-gray);margin-bottom:0.75rem}
+
+/* Jobs grid */
+.jobs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem}
+
+/* Job card improved */
+.job-card{
+  background:var(--white);
+  border-radius:14px;
+  padding:1.25rem;
+  box-shadow:0 8px 30px rgba(2,6,23,0.06);
+  display:flex;
+  flex-direction:column;
+  gap:0.6rem;
+  border-top:6px solid transparent;
+  transition:transform .22s ease, box-shadow .22s ease;
+}
+.job-card:hover{transform:translateY(-6px);box-shadow:0 18px 48px rgba(2,6,23,0.12)}
+.job-title{color:var(--primary-blue);font-weight:800;font-size:1.05rem}
+.job-company{color:var(--secondary-teal);font-weight:700;}
+.job-details{color:var(--dark-gray);opacity:.85;font-size:.95rem;display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.2rem}
+.job-desc{color:var(--dark-gray);opacity:.9;margin-top:0.4rem;font-size:0.95rem}
+.job-actions{display:flex;gap:0.6rem;margin-top:0.8rem}
+.job-actions .btn{padding:0.55rem 0.9rem;border-radius:9px}
+
+/* Level color strip */
+.level-intern{border-top-color:var(--success)}
+.level-junior{border-top-color:var(--accent-yellow)}
+.level-mid{border-top-color:var(--error)}
+
+/* Bounce animation */
+@keyframes bounceIn{
+  0%{transform:translateY(-8px);opacity:0}
+  60%{transform:translateY(6px);opacity:1}
+  100%{transform:translateY(0);opacity:1}
+}
+.job-card.animate{animation:bounceIn .45s cubic-bezier(.2,.9,.3,1)}
+
+/* Employer form */
+.employer-form{position:fixed;right:1.5rem;bottom:1.5rem;width:360px;background:var(--white);padding:1.25rem;border-radius:12px;box-shadow:0 20px 60px rgba(2,6,23,0.12);z-index:80}
+.employer-form h3{color:var(--primary-blue);margin-bottom:.5rem}
+.employer-form label{display:block;margin:0.5rem 0;font-weight:700;color:var(--dark-gray)}
+.employer-form input, .employer-form select, .employer-form textarea{width:100%;padding:0.6rem;border-radius:8px;border:1px solid rgba(30,58,138,0.08);margin-top:0.25rem}
+
+/* Form actions */
+.form-actions{display:flex;justify-content:flex-end;gap:0.5rem;margin-top:0.5rem}
+
+/* Toasts */
+.toast-container{position:fixed;top:5rem;right:1.25rem;display:flex;flex-direction:column;gap:0.6rem;z-index:120}
+.toast{padding:0.75rem 1rem;border-radius:10px;color:#fff;font-weight:700;min-width:200px;box-shadow:0 8px 30px rgba(2,6,23,0.15);opacity:0;transform:translateY(-8px);animation:toastIn .28s ease forwards}
+.toast-info{background:var(--info)}
+.toast-success{background:var(--success)}
+.toast-error{background:var(--error)}
+@keyframes toastIn{to{opacity:1;transform:translateY(0)}}
+
+/* pagination button */
+#load-more{margin:1.25rem auto;display:inline-block}
+
+/* Responsive */
+@media (max-width:768px){
+  .filters{flex-direction:column;align-items:stretch}
+  .suggestion{margin-left:0;text-align:left}
+  .employer-form{position:static;width:100%;margin:1rem 0}
+  .topbar-inner{padding:0.75rem 1rem}
+}
