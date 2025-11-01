@@ -5,6 +5,430 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Browse Courses - SkillLink Namibia</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Enhanced Browse Courses Styles */
+    .page-header {
+      margin-bottom: 2rem;
+    }
+
+    .page-header h1 {
+      color: var(--primary-blue);
+      margin-bottom: 0.5rem;
+    }
+
+    .page-subtitle {
+      color: var(--dark-gray);
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    /* Search and Filter Section */
+    .search-filter-section {
+      background: var(--white);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+    }
+
+    .search-bar {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .search-input {
+      flex: 1;
+      min-width: 250px;
+      padding: 0.8rem 1.2rem;
+      border: 2px solid var(--light-gray);
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--primary-blue);
+    }
+
+    .search-btn {
+      padding: 0.8rem 2rem;
+      background: var(--primary-blue);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .search-btn:hover {
+      background: #1E40AF;
+      transform: translateY(-2px);
+    }
+
+    /* Filter Tags */
+    .filter-section {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .filter-label {
+      font-weight: 600;
+      color: var(--dark-gray);
+    }
+
+    .filter-tags {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      flex: 1;
+    }
+
+    .filter-tag {
+      padding: 0.5rem 1rem;
+      border: 2px solid var(--light-gray);
+      border-radius: 20px;
+      background: var(--white);
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--dark-gray);
+    }
+
+    .filter-tag:hover {
+      border-color: var(--primary-blue);
+      background: var(--light-gray);
+    }
+
+    .filter-tag.active {
+      background: var(--primary-blue);
+      color: var(--white);
+      border-color: var(--primary-blue);
+    }
+
+    /* Category Pills */
+    .category-section {
+      margin-bottom: 2rem;
+    }
+
+    .category-pills {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+    }
+
+    .category-pill {
+      padding: 0.8rem 1.5rem;
+      background: var(--white);
+      border: 2px solid var(--light-gray);
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s;
+      white-space: nowrap;
+      font-weight: 600;
+      color: var(--dark-gray);
+    }
+
+    .category-pill:hover {
+      border-color: var(--primary-blue);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .category-pill.active {
+      background: var(--primary-blue);
+      color: var(--white);
+      border-color: var(--primary-blue);
+    }
+
+    /* Results Header */
+    .results-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .results-count {
+      color: var(--dark-gray);
+      font-size: 1rem;
+    }
+
+    .sort-dropdown {
+      padding: 0.6rem 1rem;
+      border: 2px solid var(--light-gray);
+      border-radius: 8px;
+      background: var(--white);
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+
+    .sort-dropdown:focus {
+      outline: none;
+      border-color: var(--primary-blue);
+    }
+
+    /* Course Grid */
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    /* Enhanced Course Card */
+    .course-card {
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      border: 2px solid transparent;
+    }
+
+    .course-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      border-color: var(--primary-blue);
+    }
+
+    .course-thumbnail {
+      width: 100%;
+      height: 180px;
+      background: linear-gradient(135deg, var(--primary-blue), var(--secondary-teal));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 3rem;
+      position: relative;
+    }
+
+    .course-level-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.4rem 0.8rem;
+      background: rgba(255,255,255,0.95);
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--primary-blue);
+    }
+
+    .course-content {
+      padding: 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .course-provider {
+      font-size: 0.85rem;
+      color: var(--secondary-teal);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .course-title {
+      color: var(--primary-blue);
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      line-height: 1.3;
+    }
+
+    .course-description {
+      color: var(--dark-gray);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      flex: 1;
+    }
+
+    .course-meta {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      font-size: 0.9rem;
+      color: var(--dark-gray);
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .course-tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .course-tag {
+      padding: 0.3rem 0.7rem;
+      background: var(--light-gray);
+      border-radius: 15px;
+      font-size: 0.8rem;
+      color: var(--dark-gray);
+    }
+
+    .course-footer {
+      display: flex;
+      gap: 0.75rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--light-gray);
+    }
+
+    .btn-enroll {
+      flex: 1;
+      padding: 0.75rem 1.5rem;
+      background: var(--primary-blue);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .btn-enroll:hover {
+      background: #1E40AF;
+      transform: translateY(-2px);
+    }
+
+    .btn-save {
+      padding: 0.75rem 1rem;
+      background: var(--white);
+      color: var(--primary-blue);
+      border: 2px solid var(--primary-blue);
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .btn-save:hover {
+      background: var(--light-gray);
+      transform: translateY(-2px);
+    }
+
+    .btn-save.saved {
+      background: var(--primary-blue);
+      color: var(--white);
+    }
+
+    /* Featured Course Banner */
+    .featured-banner {
+      background: linear-gradient(135deg, var(--primary-blue), #1E40AF);
+      color: var(--white);
+      padding: 2rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .featured-content h2 {
+      margin-bottom: 0.5rem;
+      font-size: 1.8rem;
+    }
+
+    .featured-content p {
+      opacity: 0.9;
+      margin-bottom: 1rem;
+    }
+
+    .btn-featured {
+      padding: 0.75rem 1.5rem;
+      background: var(--accent-yellow);
+      color: var(--dark-gray);
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .btn-featured:hover {
+      background: #e58e08;
+      transform: translateY(-2px);
+    }
+
+    /* Loading State */
+    .loading-state {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--dark-gray);
+    }
+
+    .loading-spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid var(--light-gray);
+      border-top-color: var(--primary-blue);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 1rem;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--dark-gray);
+    }
+
+    .empty-state h3 {
+      color: var(--primary-blue);
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .courses-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .search-bar {
+        flex-direction: column;
+      }
+
+      .search-input {
+        min-width: 100%;
+      }
+
+      .category-pills {
+        flex-wrap: wrap;
+      }
+
+      .featured-banner {
+        text-align: center;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="dashboard-container">
@@ -18,29 +442,642 @@
         <li><a href="my-learning.html">My Learning</a></li>
         <li><a href="mentors.html">Find Mentors</a></li>
         <li><a href="jobs.html">Job Board</a></li>
+        <li><a href="certificates.html">My Certificates</a></li>
       </ul>
     </aside>
 
     <main class="main-content">
-      <h1>Available Courses</h1>
-      <div class="card-grid">
-        <div class="card">
-          <h3>Web Development Basics</h3>
-          <p>Learn HTML, CSS, and JavaScript to build modern websites.</p>
-          <button class="btn-primary">Enroll</button>
+      <div class="page-header">
+        <h1>Browse Courses</h1>
+        <p class="page-subtitle">Discover free courses from top platforms - Learn skills that Namibian employers need</p>
+      </div>
+
+      <!-- Featured Course Banner -->
+      <div class="featured-banner">
+        <div class="featured-content">
+          <h2>🔥 Featured: Full Stack Web Development</h2>
+          <p>Complete bootcamp covering HTML, CSS, JavaScript, React, and Node.js - Perfect for aspiring developers!</p>
+          <button class="btn-featured" onclick="enrollCourse('Full Stack Web Development')">Start Learning Free</button>
         </div>
-        <div class="card">
-          <h3>Data Analysis with Python</h3>
-          <p>Master data visualization and analysis using Python and pandas.</p>
-          <button class="btn-primary">Enroll</button>
+      </div>
+
+      <!-- Search and Filter Section -->
+      <div class="search-filter-section">
+        <div class="search-bar">
+          <input 
+            type="text" 
+            class="search-input" 
+            id="courseSearch" 
+            placeholder="Search for courses, skills, or topics..."
+            onkeyup="searchCourses()"
+          >
+          <button class="search-btn" onclick="searchCourses()">Search</button>
         </div>
-        <div class="card">
-          <h3>Networking Fundamentals</h3>
-          <p>Understand how networks operate, from routers to protocols.</p>
-          <button class="btn-primary">Enroll</button>
+
+        <div class="filter-section">
+          <span class="filter-label">Level:</span>
+          <div class="filter-tags">
+            <div class="filter-tag active" onclick="filterByLevel('all')">All Levels</div>
+            <div class="filter-tag" onclick="filterByLevel('beginner')">Beginner</div>
+            <div class="filter-tag" onclick="filterByLevel('intermediate')">Intermediate</div>
+            <div class="filter-tag" onclick="filterByLevel('advanced')">Advanced</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Category Pills -->
+      <div class="category-section">
+        <div class="category-pills">
+          <div class="category-pill active" onclick="filterByCategory('all')">All Courses</div>
+          <div class="category-pill" onclick="filterByCategory('technology')">💻 Technology</div>
+          <div class="category-pill" onclick="filterByCategory('business')">💼 Business</div>
+          <div class="category-pill" onclick="filterByCategory('design')">🎨 Design</div>
+          <div class="category-pill" onclick="filterByCategory('marketing')">📱 Marketing</div>
+          <div class="category-pill" onclick="filterByCategory('data')">📊 Data Science</div>
+          <div class="category-pill" onclick="filterByCategory('personal')">🎯 Personal Development</div>
+        </div>
+      </div>
+
+      <!-- Results Header -->
+      <div class="results-header">
+        <div class="results-count">
+          Showing <strong id="courseCount">12</strong> courses
+        </div>
+        <select class="sort-dropdown" id="sortDropdown" onchange="sortCourses()">
+          <option value="recommended">Recommended</option>
+          <option value="popular">Most Popular</option>
+          <option value="newest">Newest First</option>
+          <option value="shortest">Shortest Duration</option>
+          <option value="longest">Longest Duration</option>
+        </select>
+      </div>
+
+      <!-- Courses Grid -->
+      <div class="courses-grid" id="coursesGrid">
+        <!-- Course Card 1 -->
+        <div class="course-card" data-category="technology" data-level="beginner">
+          <div class="course-thumbnail">
+            💻
+            <span class="course-level-badge">Beginner</span>
+          </div>
+          <div class="course-content">
+            <div class="course-provider">Coursera • Google</div>
+            <h3 class="course-title">Web Development Basics</h3>
+            <p class="course-description">Learn HTML, CSS, and JavaScript to build modern websites. Perfect for beginners starting their tech journey.</p>
+            
+            <div class="course-meta">
+              <div class="meta-item">
+                <span>⏱️</span>
+                <span>8 weeks</span>
+              </div>
+              <div class="meta-item">
+                <span>📚</span>
+                <span>20 lessons</span>
+              </div>
+              <div class="meta-item">
+                <span>🏆</span>
+                <span>Certificate</span>
+              </div>
+            </div>
+
+            <div class="course-tags">
+              <span class="course-tag">HTML</span>
+              <span class="course-tag">CSS</span>
+              <span class="course-tag">JavaScript</span>
+            </div>
+
+            <div class="course-footer">
+              <button class="btn-enroll" onclick="enrollCourse('Web Development Basics')">Enroll Free</button>
+              <button class="btn-save" onclick="saveCourse(this)">💾 Save</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Course Card 2 -->
+        <div class="course-card" data-category="data" data-level="intermediate">
+          <div class="course-thumbnail">
+            📊
+            <span class="course-level-badge">Intermediate</span>
+          </div>
+          <div class="course-content">
+            <div class="course-provider">edX • IBM</div>
+            <h3 class="course-title">Data Analysis with Python</h3>
+            <p class="course-description">Master data visualization and analysis using Python and pandas. Learn to make data-driven decisions.</p>
+            
+            <div class="course-meta">
+              <div class="meta-item">
+                <span>⏱️</span>
+                <span>6 weeks</span>
+              </div>
+              <div class="meta-item">
+                <span>📚</span>
+                <span>18 lessons</span>
+              </div>
+              <div class="meta-item">
+                <span>🏆</span>
+                <span>Certificate</span>
+              </div>
+            </div>
+
+            <div class="course-tags">
+              <span class="course-tag">Python</span>
+              <span class="course-tag">Pandas</span>
+              <span class="course-tag">Data Viz</span>
+            </div>
+
+            <div class="course-footer">
+              <button class="btn-enroll" onclick="enrollCourse('Data Analysis with Python')">Enroll Free</button>
+              <button class="btn-save" onclick="saveCourse(this)">💾 Save</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Course Card 3 -->
+        <div class="course-card" data-category="technology" data-level="intermediate">
+          <div class="course-thumbnail">
+            🌐
+            <span class="course-level-badge">Intermediate</span>
+          </div>
+          <div class="course-content">
+            <div class="course-provider">Cisco Networking Academy</div>
+            <h3 class="course-title">Networking Fundamentals</h3>
+            <p class="course-description">Understand how networks operate, from routers to protocols. Essential for IT careers.</p>
+            
+            <div class="course-meta">
+              <div class="meta-item">
+                <span>⏱️</span>
+                <span>10 weeks</span>
+              </div>
+              <div class="meta-item">
+                <span>📚</span>
+                <span>25 lessons</span>
+              </div>
+              <div class="meta-item">
+                <span>🏆</span>
+                <span>Certificate</span>
+              </div>
+            </div>
+
+            <div class="course-tags">
+              <span class="course-tag">TCP/IP</span>
+              <span class="course-tag">Routing</span>
+              <span class="course-tag">Security</span>
+            </div>
+
+            <div class="course-footer">
+              <button class="btn-enroll" onclick="enrollCourse('Networking Fundamentals')">Enroll Free</button>
+              <button class="btn-save" onclick="saveCourse(this)">💾 Save</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Course Card 4 -->
+        <div class="course-card" data-category="marketing" data-level="beginner">
+          <div class="course-thumbnail">
+            📱
+            <span class="course-level-badge">Beginner</span>
+          </div>
+          <div class="course-content">
+            <div class="course-provider">LinkedIn Learning • HubSpot</div>
+            <h3 class="course-title">Digital Marketing Fundamentals</h3>
+            <p class="course-description">Learn SEO, social media marketing, content strategy, and analytics to grow businesses online.</p>
+            
+            <div class="course-meta">
+              <div class="meta-item">
+                <span>⏱️</span>
+                <span>4 weeks</span>
+              </div>
+              <div class="meta-item">
+                <span>📚</span>
+                <span>15 lessons</span>
+              </div>
+              <div class="meta-item">
+                <span>🏆</span>
+                <span>Certificate</span>
+              </div>
+            </div>
+
+            <div class="course-tags">
+              <span class="course-tag">SEO</span>
+              <span class="course-tag">Social Media</span>
+              <span class="course-tag">Analytics</span>
+            </div>
+
+            <div class="course-footer">
+              <button class="btn-enroll" onclick="enrollCourse('Digital Marketing Fundamentals')">Enroll Free</button>
+              <button class="btn-save" onclick="saveCourse(this)">💾 Save</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Course Card 5 -->
+        <div class="course-card" data-category="business" data-level="beginner">
+          <div class="course-thumbnail">
+            💼
+            <span class="course-level-badge">Beginner</span>
+          </div>
+          <div class="course-content">
+            <div class="course-provider">Coursera • University of Virginia</div>
+            <h3 class="course-title">Business Communication Skills</h3>
+            <p class="course-description">Professional communication and presentation skills for workplace success and career advancement.</p>
+            
+            <div class="course-meta">
+              <div class="meta-item">
+                <span>⏱️</span>
+                <span>3 weeks</span>
+              </div>
+              <div class="meta-item">
+                <span>📚</span>
+                <span>12 lessons</span>
+              </div>
+              <div class="meta-item">
+                <span>🏆</span>
+                <span>Certificate</span>
+              </div>
+            </div>
+
+            <div class="course-tags">
+              <span class="course-tag">Communication</span>
+              <span class="course-tag">Presentations</span>
+              <span class="course-tag">Writing</span>
+            </div>
+
+            <div class="course-footer">
+              <button class="btn-enroll" onclick="enrollCourse('Business Communication Skills')">Enroll Free</button>
+              <button class="btn-save" onclick="saveCourse(this)">💾 Save</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Course Card 6 -->
+        <div class="course-card" data-category="design" data-level="beginner">
+          <div class="course-thumbnail">
+            🎨
+            <span class="course-level-badge">Beginner</span>
+          </div>
+          <div class="course-content">
+            <div class="course-provider">Udemy • Design Institute</div>
+            <h3 class="course-title">Graphic Design Essentials</h3>
+            <p class="course-description">Master design principles, color theory, typography, and create professional graphics using industry tools.</p>
+            
+            <div class="course-meta">
+              <div class="meta-item">
+                <span>⏱️</span>
+                <span>5 weeks</span>
+              </div>
+              <div class="meta-item">
+                <span>📚</span>
+                <span>16 lessons</span>
+              </div>
+              <div class="meta-item">
+                <span>🏆</span>
+                <span>Certificate</span>
+              </div>
+            </div>
+
+            <div class="course-tags">
+              <span class="course-tag">Adobe</span>
+              <span class="course-tag">Typography</span>
+              <span class="course-tag">Branding</span>
+            </div>
+
+            <div class="course-footer">
+              <button class="btn-enroll" onclick="enrollCourse('Graphic Design Essentials')">Enroll Free</button>
+              <button class="btn-save" onclick="saveCourse(this)">💾 Save</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Course Card 7 -->
+        <div class="course-card" data-category="business" data-level="intermediate">
+          <div class="course-thumbnail">
+            📈
+            <span class="course-level-badge">Intermediate</span>
+          </div>
+          <div class="course-content">
+            <div class="course-provider">LinkedIn Learning • PMI</div>
+            <h3 class="course-title">Project Management Fundamentals</h3>
+            <p class="course-description">Learn essential project management methodologies, tools, and leadership skills for successful project delivery.</p>
+            
+            <div class="course-meta">
+              <div class="meta-item">
+                <span>⏱️</span>
+                <span>6 weeks</span>
+              </div>
+              <div class="meta-item">
+                <span>📚</span>
+                <span>20 lessons</span>
+              </div>
+              <div class="meta-item">
+                <span>🏆</span>
+                <span>Certificate</span>
+              </div>
+            </div>
+
+            <div class="course-tags">
+              <span class="course-tag">Agile</span>
+              <span class="course-tag">Leadership</span>
+              <span class="course-tag">Planning</span>
+            </div>
+
+            <div class="course-footer">
+              <button class="btn-enroll" onclick="enrollCourse('Project Management Fundamentals')">Enroll Free</button>
+              <button class="btn-save" onclick="saveCourse(this)">💾 Save</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Course Card 8 -->
+        <div class="course-card" data-category="personal" data-level="beginner">
+          <div class="course-thumbnail">
+            🎯
+            <span class="course-level-badge">Beginner</span>
+          </div>
+          <div class="course-content">
+            <div class="course-provider">Coursera • Career Skills</div>
+            <h3 class="course-title">Job Interview Preparation</h3>
+            <p class="course-description">Master interview techniques, answer common questions confidently, and land your dream job in Namibia.</p>
+            
+            <div class="course-meta">
+              <div class="meta-item">
+                <span>⏱️</span>
+                <span>2 weeks</span>
+              </div>
+              <div class="meta-item">
+                <span>📚</span>
+                <span>10 lessons</span>
+              </div>
+              <div class="meta-item">
+                <span>🏆</span>
+                <span>Certificate</span>
+              </div>
+            </div>
+
+            <div class="course-tags">
+              <span class="course-tag">Interview Skills</span>
+              <span class="course-tag">Resume</span>
+              <span class="course-tag">Career</span>
+            </div>
+
+            <div class="course-footer">
+              <button class="btn-enroll" onclick="enrollCourse('Job Interview Preparation')">Enroll Free</button>
+              <button class="btn-save" onclick="saveCourse(this)">💾 Save</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Course Card 9 -->
+        <div class="course-card" data-category="technology" data-level="advanced">
+          <div class="course-thumbnail">
+            🤖
+            <span class="course-level-badge">Advanced</span>
+          </div>
+          <div class="course-content">
+            <div class="course-provider">edX • MIT</div>
+            <h3 class="course-title">Introduction to Artificial Intelligence</h3>
+            <p class="course-description">Explore machine learning, neural networks, and AI applications. Build your first AI models.</p>
+            
+            <div class="course-meta">
+              <div class="meta-item">
+                <span>⏱️</span>
+                <span>12 weeks</span>
+              </div>
+              <div class="meta-item">
+                <span>📚</span>
+                <span>30 lessons</span>
+              </div>
+              <div class="meta-item">
+                <span>🏆</span>
+                <span>Certificate</span>
+              </div>
+            </div>
+
+            <div class="course-tags">
+              <span class="course-tag">Machine Learning</span>
+              <span class="course-tag">Python</span>
+              <span class="course-tag">AI</span>
+            </div>
+
+            <div class="course-footer">
+              <button class="btn-enroll" onclick="enrollCourse('Introduction to Artificial Intelligence')">Enroll Free</button>
+              <button class="btn-save" onclick="saveCourse(this)">💾 Save</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Course Card 10 -->
+        <div class="course-card" data-category="business" data-level="beginner">
+          <div class="course-thumbnail">
+            🚀
+            <span class="course-level-badge">Beginner</span>
+          </div>
+          <div class="course-content">
+            <div class="course-provider">Udemy • Business Academy</div>
+            <h3 class="course-title">Entrepreneurship for Beginners</h3>
+            <p class="course-description">Start your own business in Namibia. Learn business planning, funding, and growth strategies.</p>
+            
+            <div class="course-meta">
+              <div class="meta-item">
+                <span>⏱️</span>
+                <span>4 weeks</span>
+              </div>
+              <div class="meta-item">
+                <span>📚</span>
+                <span>14 lessons</span>
+              </div>
+              <div class="meta-item">
+                <span>🏆</span>
+                <span>Certificate</span>
+              </div>
+            </div>
+
+            <div class="course-tags">
+              <span class="course-tag">Business Plan</span>
+              <span class="course-tag">Funding</span>
+              <span class="course-tag">Startup</span>
+            </div>
+
+            <div class="course-footer">
+              <button class="btn-enroll" onclick="enrollCourse('Entrepreneurship for Beginners')">Enroll Free</button>
+              <button class="btn-save" onclick="saveCourse(this)">💾 Save</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Course Card 11 -->
+        <div class="course-card" data-category="data" data-level="intermediate">
+          <div class="course-thumbnail">
+            📉
+            <span class="course-level-badge">Intermediate</span>
+          </div>
+          <div class="course-content">
+            <div class="course-provider">Coursera • Google</div>
+            <h3 class="course-title">Data Visualization with Tableau</h3>
+            <p class="course-description">Create interactive dashboards and tell stories with data using Tableau.</p>
+            
+            <div class="course-meta">
+              <div class="meta-item">
+                <span>⏱️</span>
+                <span>5 weeks</span>
+              </div>
+              <div class="meta-item">
+                <span>📚</span>
+                <span>17 lessons</span>
+              </div>
+              <div class="meta-item">
+                <span>🏆</span>
+                <span>Certificate</span>
+              </div>
+            </div>
+
+            <div class="course-tags">
+              <span class="course-tag">Tableau</span>
+              <span class="course-tag">Analytics</span>
+              <span class="course-tag">Dashboards</span>
+            </div>
+
+            <div class="course-footer">
+              <button class="btn-enroll" onclick="enrollCourse('Data Visualization with Tableau')">Enroll Free</button>
+              <button class="btn-save" onclick="saveCourse(this)">💾 Save</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Course Card 12 -->
+        <div class="course-card" data-category="personal" data-level="beginner">
+          <div class="course-thumbnail">
+            ✍️
+            <span class="course-level-badge">Beginner</span>
+          </div>
+          <div class="course-content">
+            <div class="course-provider">LinkedIn Learning</div>
+            <h3 class="course-title">Professional CV & LinkedIn Profile</h3>
+            <p class="course-description">Create a standout CV and optimize your LinkedIn profile to attract Namibian employers.</p>
+            
+            <div class="course-meta">
+              <div class="meta-item">
+                <span>⏱️</span>
+                <span>2 weeks</span>
+              </div>
+              <div class="meta-item">
+                <span>📚</span>
+                <span>8 lessons</span>
+              </div>
+              <div class="meta-item">
+                <span>🏆</span>
+                <span>Certificate</span>
+              </div>
+            </div>
+
+            <div class="course-tags">
+              <span class="course-tag">CV Writing</span>
+              <span class="course-tag">LinkedIn</span>
+              <span class="course-tag">Job Search</span>
+            </div>
+
+            <div class="course-footer">
+              <button class="btn-enroll" onclick="enrollCourse('Professional CV & LinkedIn Profile')">Enroll Free</button>
+              <button class="btn-save" onclick="saveCourse(this)">💾 Save</button>
+            </div>
+          </div>
         </div>
       </div>
     </main>
   </div>
+
+  <script>
+    // Search functionality
+    function searchCourses() {
+      const searchTerm = document.getElementById('courseSearch').value.toLowerCase();
+      const cards = document.querySelectorAll('.course-card');
+      let visibleCount = 0;
+      
+      cards.forEach(card => {
+        const title = card.querySelector('.course-title').textContent.toLowerCase();
+        const description = card.querySelector('.course-description').textContent.toLowerCase();
+        const tags = Array.from(card.querySelectorAll('.course-tag')).map(tag => tag.textContent.toLowerCase()).join(' ');
+        
+        if (title.includes(searchTerm) || description.includes(searchTerm) || tags.includes(searchTerm)) {
+          card.style.display = 'flex';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+      
+      document.getElementById('courseCount').textContent = visibleCount;
+    }
+
+    // Filter by level
+    function filterByLevel(level) {
+      // Update active state
+      document.querySelectorAll('.filter-tag').forEach(tag => tag.classList.remove('active'));
+      event.target.classList.add('active');
+      
+      const cards = document.querySelectorAll('.course-card');
+      let visibleCount = 0;
+      
+      cards.forEach(card => {
+        const cardLevel = card.getAttribute('data-level');
+        if (level === 'all' || cardLevel === level) {
+          card.style.display = 'flex';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+      
+      document.getElementById('courseCount').textContent = visibleCount;
+    }
+
+    // Filter by category
+    function filterByCategory(category) {
+      // Update active state
+      document.querySelectorAll('.category-pill').forEach(pill => pill.classList.remove('active'));
+      event.target.classList.add('active');
+      
+      const cards = document.querySelectorAll('.course-card');
+      let visibleCount = 0;
+      
+      cards.forEach(card => {
+        const cardCategory = card.getAttribute('data-category');
+        if (category === 'all' || cardCategory === category) {
+          card.style.display = 'flex';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+      
+      document.getElementById('courseCount').textContent = visibleCount;
+    }
+
+    // Sort courses
+    function sortCourses() {
+      const sortValue = document.getElementById('sortDropdown').value;
+      alert('Sort by: ' + sortValue + '\n\nIn a full implementation, this would reorder courses based on:\n• Popularity (enrollment numbers)\n• Date added\n• Duration\n• User ratings');
+    }
+
+    // Enroll in course
+    function enrollCourse(courseName) {
+      alert('Enrolling in: ' + courseName + '\n\n✓ Course added to My Learning\n✓ You can now start the first lesson\n✓ Progress will be tracked automatically\n\nRedirecting to My Learning...');
+      setTimeout(() => {
+        window.location.href = 'my-learning.html';
+      }, 1500);
+    }
+
+    // Save course
+    function saveCourse(button) {
+      if (button.classList.contains('saved')) {
+        button.classList.remove('saved');
+        button.textContent = '💾 Save';
+        alert('Course removed from saved list');
+      } else {
+        button.classList.add('saved');
+        button.textContent = '✓ Saved';
+        alert('Course saved for later!\n\nYou can find it in the "Saved" tab.');
+      }
+    }
+  </script>
 </body>
 </html>
