@@ -63,44 +63,8 @@
     </div>
   </div>
 
-  <!-- Employer/Admin form (hidden for now) -->
-  <aside id="employer-form" class="employer-form" hidden>
-    <h3>Employer / Admin — Add Job</h3>
-    <form id="add-job-form">
-      <label>Job Title
-        <input id="job-title" type="text" required>
-      </label>
-      <label>Company
-        <input id="job-company" type="text" required>
-      </label>
-      <label>Category
-        <select id="job-category">
-          <option>Technology</option>
-          <option>Business</option>
-          <option>Design</option>
-          <option>Marketing</option>
-          <option>Data Science</option>
-        </select>
-      </label>
-      <label>Location
-        <input id="job-location" type="text" value="Windhoek">
-      </label>
-      <label>Level
-        <select id="job-level">
-          <option>Internship</option>
-          <option>Junior</option>
-          <option>Mid</option>
-          <option>Senior</option>
-        </select>
-      </label>
-      <label>Description
-        <textarea id="job-desc" rows="4"></textarea>
-      </label>
-    </form>
-  </aside>
-
   <!-- Toast container -->
-  <div id="toast-container" class="toast-container" aria-live="assertive" aria-atomic="true"></div>
+  <div id="toastContainer" class="toast-container"></div>
 
   <script src="../js/job-board.js"></script>
 </body>
