@@ -333,7 +333,7 @@
 
                     <div class="form-navigation">
                         <button type="button" class="btn btn-secondary" onclick="previousStep(2)">Back</button>
-                        <button type="submit" class="btn btn-primary btn-success">Complete Setup</button>
+                       <button type="button" class="btn btn-primary" onclick="completeRegistration()">Complete Setup</button>
                     </div>
                 </div>
             </form>
@@ -344,7 +344,7 @@
         </div>
     </div>
 
-    <script src="main.js"></script>
+    
     <script>
           
         let currentStep = 1;
@@ -369,18 +369,21 @@
             document.getElementById('step-' + currentStep).classList.add('active');
             document.getElementById('step-indicator-' + currentStep).classList.add('active');
         }
-
+function completeRegistration() {
+    console.log('Complete registration called');
+    alert('🎉 Registration Successful!\n\nWelcome to SkillLink Namibia!');
+            window.location.href = 'dashboard.html';
+    }
         // Simple form submission for prototype
-        document.getElementById('register-form').addEventListener('submit', function(e) {
-            e.preventDefault();
+       // Simple form submission for prototype
+document.getElementById('register-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+   
+    
+});
             
-            // Just show success and redirect
-            alert('🎉 Registration Successful!\n\nWelcome to SkillLink Namibia!');
-            
-            setTimeout(function() {
-                window.location.href = 'dashboard.html';
-            }, 1500);
-        });
+    
     </script>
 </body>
 </html>

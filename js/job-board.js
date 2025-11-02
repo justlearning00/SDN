@@ -239,4 +239,4 @@ function setupIconFilters() {
     toastContainer.appendChild(toast);
     setTimeout(() => toast.remove(), 3000);
   }
-});
+};
