@@ -1,4 +1,12 @@
+/* job-board.js
+   - Icon filters
+   - Search + level + location filters
+   - Toasts with color types (info, success, error)
+   - Employer form to add jobs (localStorage)
+   - Bounce animation on render
+*/
 
+// ---------------------- Sample user & mapping ----------------------
 const user = {
   id: 1,
   name: "Jane Doe",
