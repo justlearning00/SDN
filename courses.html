@@ -443,6 +443,7 @@
         <li><a href="mentors.html">Find Mentors</a></li>
         <li><a href="job-board.html">Job Board</a></li>
         <li><a href="certificates.html">My Certificates</a></li>
+        <li><a href="#" id="logout-btn">Logout</a></li>
       </ul>
     </aside>
 
@@ -1078,6 +1079,14 @@
         alert('Course saved for later!\n\nYou can find it in the "Saved" tab.');
       }
     }
+
+    document.getElementById('logout-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            if (confirm('Are you sure you want to log out?')) {
+                alert('Logged out successfully');
+                window.location.href = 'index.html';
+            }
+        });
   </script>
 </body>
 </html>
