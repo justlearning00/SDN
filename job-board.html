@@ -101,7 +101,13 @@
 
   <!-- Toast container -->
   <div id="toast-container" class="toast-container" aria-live="assertive" aria-atomic="true"></div>
-
+<script>document.getElementById('logout-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            if (confirm('Are you sure you want to log out?')) {
+                alert('Logged out successfully');
+                window.location.href = 'index.html';
+            }
+        });</script>
   <script src="../js/job-board.js"></script>
 </body>
 </html>
