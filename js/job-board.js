@@ -99,7 +99,7 @@ function renderJobs(list) {
     return;
   }
   resultsInfo.textContent = `${list.length} job(s) found`;
-
+//inspo
   // Show first visibleCount jobs (simple pagination)
   const showList = list.slice(0, visibleCount);
   showList.forEach(job => {
