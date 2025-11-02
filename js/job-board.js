@@ -1,4 +1,12 @@
+/* job-board.js
+   - Icon filters
+   - Search + level + location filters
+   - Toasts with color types (info, success, error)
+   - Employer form to add jobs (localStorage)
+   - Bounce animation on render
+*/
 
+// ---------------------- Sample user & mapping ----------------------
 const user = {
   id: 1,
   name: "Jane Doe",
@@ -187,123 +195,48 @@ function setupIconFilters() {
       applyFilters();
     });
   });
-}
 
-// ---------------------- Apply / Save handlers ----------------------
-function handleApply(e) {
-  const id = Number(e.currentTarget.dataset.id);
-  const job = jobs.find(j => j.id === id);
-  if (!job) { showToast('Job not found', 'error'); return; }
-  // In prototype: show success
-  showToast(`Applied for "${job.title}" at ${job.company}`, 'success', 2500);
-  // Real app: navigate to application page/modal
-}
-
-function handleSaveJob(e) {
-  const id = Number(e.currentTarget.dataset.id);
-  const savedKey = 'skilllink_saved';
-  const raw = localStorage.getItem(savedKey);
-  const current = raw ? JSON.parse(raw) : [];
-  if (!current.includes(id)) {
-    current.push(id);
-    localStorage.setItem(savedKey, JSON.stringify(current));
-    showToast('Saved job to your profile', 'success', 2000);
-  } else {
-    showToast('You already saved this job', 'info', 1200);
-  }
-}
-
-// ---------------------- Employer tools ----------------------
-function setupEmployerTools() {
-  toggleEmployerBtn.addEventListener('click', () => {
-    const isHidden = employerFormWrap.hidden;
-    employerFormWrap.hidden = !isHidden;
-    toggleEmployerBtn.textContent = isHidden ? 'Hide Employer Tools' : 'Employer Tools';
-  });
-  closeEmployerBtn.addEventListener('click', () => {
-    employerFormWrap.hidden = true;
-    toggleEmployerBtn.textContent = 'Employer Tools';
+  searchBtn.addEventListener("click", () => {
+    const query = jobSearch.value.toLowerCase();
+    const filtered = jobs.filter((j) => j.title.toLowerCase().includes(query));
+    renderJobs(filtered);
+    showToast(`Showing results for "${query}"`, "info");
   });
 
-  addJobForm.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-    const newJob = {
-      id: Date.now(),
-      title: document.getElementById('job-title').value.trim(),
-      company: document.getElementById('job-company').value.trim(),
-      category: document.getElementById('job-category').value,
-      location: document.getElementById('job-location').value.trim() || 'Windhoek',
-      level: document.getElementById('job-level').value,
-      desc: document.getElementById('job-desc').value.trim()
-    };
-    jobs.unshift(newJob);
-    saveJobs(jobs);
-    applyFilters();
-    showToast('Job added', 'success', 1600);
-    addJobForm.reset();
-  });
-}
+  function openModal(job) {
+    modalContent.innerHTML = `
+      <h2>${job.title}</h2>
+      <p><strong>Company:</strong> ${job.company}</p>
+      <p><strong>Location:</strong> ${job.location}</p>
+      <p><strong>Category:</strong> ${job.category}</p>
+      <p><strong>Level:</strong> <span class="${getLevelClass(job.level)} level-badge">${job.level}</span></p>
+      <p><strong>Duration:</strong> ${job.duration}</p>
+      <p style="margin-top:1rem;">${job.description}</p>
+      <button id="applyBtn">Apply Now</button>
+    `;
+    modalOverlay.style.display = "flex";
 
-// ---------------------- Auto-suggest from completed courses ----------------------
-function autoSuggestFromCourses() {
-  const categories = new Set();
-  user.completedCourses.forEach(c => {
-    const mapped = courseToCategory[c];
-    if (mapped) categories.add(mapped);
-  });
-  if (categories.size === 0) {
-    suggestionCatEl.textContent = '—';
-    return;
-  }
-  const first = [...categories][0];
-  suggestionCatEl.textContent = first;
-  // Activate the icon for that category
-  iconBar.querySelectorAll('.icon-btn').forEach(b => {
-    if (b.dataset.cat === first) {
-      b.classList.add('active');
-      b.setAttribute('aria-pressed', 'true');
-      activeCategories = new Set([first]);
-    } else {
-      if (b.dataset.cat !== 'All') {
-        b.classList.remove('active');
-        b.setAttribute('aria-pressed', 'false');
+    document.getElementById("applyBtn").addEventListener("click", () => {
+      if (!appliedJobs.includes(job.id)) {
+        appliedJobs.push(job.id);
+        localStorage.setItem("appliedJobs", JSON.stringify(appliedJobs));
+        showToast("Application successfully submitted.", "success");
+        renderJobs(jobs);
       }
-    }
+      modalOverlay.style.display = "none";
+    });
+  }
+
+  closeModal.addEventListener("click", () => (modalOverlay.style.display = "none"));
+  modalOverlay.addEventListener("click", (e) => {
+    if (e.target === modalOverlay) modalOverlay.style.display = "none";
   });
-}
 
-// ---------------------- Search + filter wiring ----------------------
-function setupControls() {
-  searchInput.addEventListener('input', debounce(applyFilters, 220));
-  levelFilter.addEventListener('change', applyFilters);
-  locationFilter.addEventListener('change', applyFilters);
-}
-
-// Simple debounce
-function debounce(fn, ms) {
-  let t;
-  return (...args) => {
-    clearTimeout(t);
-    t = setTimeout(() => fn.apply(this, args), ms);
-  };
-}
-
-// ---------------------- Load More ----------------------
-loadMoreBtn.addEventListener('click', () => {
-  visibleCount += 6;
-  applyFilters();
+  function showToast(message, type = "info") {
+    const toast = document.createElement("div");
+    toast.className = `toast toast-${type}`;
+    toast.textContent = message;
+    toastContainer.appendChild(toast);
+    setTimeout(() => toast.remove(), 3000);
+  }
 });
-
-// ---------------------- Init ----------------------
-function init() {
-  jobs = loadJobs();
-  setupIconFilters();
-  setupControls();
-  setupEmployerTools();
-  autoSuggestFromCourses();
-  applyFilters();
-  // initial toast
-  showToast('Job Board loaded', 'info', 1000);
-}
-
-init();

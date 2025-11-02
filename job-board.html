@@ -1,122 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Job Board - SkillLink Namibia</title>
-
-  <!-- main theme + job-board overrides -->
-  <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/job-board.css">
+  <link rel="stylesheet" href="../css/job-board.css" />
 </head>
 <body>
-  <!-- Topbar -->
-  <header class="topbar">
-    <div class="topbar-inner">
-      <div style="display:flex; align-items:center; gap:1rem;">
-        <a class="logo" href="dashboard.html">SkillLink <span>Namibia</span></a>
-        <nav class="top-nav">
-          <a href="dashboard.html" class="nav-link">Dashboard</a>
-          <a href="job-board.html" class="nav-link active">Jobs</a>
-        </nav>
+  <div class="dashboard-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        SkillLink <span style="color: var(--secondary-teal);">Namibia</span>
+      </div>
+      <ul class="sidebar-menu">
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="courses.html">Browse Courses</a></li>
+        <li><a href="my-learning.html">My Learning</a></li>
+        <li><a href="mentors.html">Find Mentors</a></li>
+        <li><a href="job-board.html" class="active">Job Board</a></li>
+        <li><a href="certificates.html">My Certificates</a></li>
+        <li><a href="#" id="logout-btn">Logout</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="top-bar">
+        <h1>Job Opportunities</h1>
       </div>
 
-      <div style="display:flex; align-items:center; gap:1rem;">
-        <!-- Employer toggle - no numeric badge -->
-        <button id="toggle-employer" class="btn btn-secondary">Employer Tools</button>
-        <!-- Back button -->
-        <a href="dashboard.html" class="btn btn-primary back-btn">← Back to Dashboard</a>
-      </div>
+      <!-- Filters -->
+      <section class="filter-section">
+        <h2>Filter Jobs by Category</h2>
+        <div class="filter-icons">
+          <div class="filter-icon active" data-category="All">All</div>
+          <div class="filter-icon" data-category="Technology">Technology</div>
+          <div class="filter-icon" data-category="Business">Business</div>
+          <div class="filter-icon" data-category="Design">Design</div>
+          <div class="filter-icon" data-category="Marketing">Marketing</div>
+          <div class="filter-icon" data-category="Data Science">Data Science</div>
+        </div>
+
+        <div class="search-bar">
+          <input type="text" id="jobSearch" placeholder="Search for jobs..." />
+          <button id="searchBtn">Search</button>
+        </div>
+      </section>
+
+      <!-- Job Cards -->
+      <section class="job-section">
+        <div id="jobContainer" class="job-container"></div>
+      </section>
+
+     
+    </main>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <span class="close-btn" id="closeModal">&times;</span>
+      <div id="modalContent"></div>
     </div>
-  </header>
+  </div>
 
-  <main class="container">
-    <!-- Intro -->
-    <section class="intro">
-      <h1>Find Opportunities That Fit You</h1>
-      <p class="muted">We’ll suggest jobs based on your completed courses. Click icons to filter, or use search + dropdowns.</p>
-    </section>
-
-    <!-- Filters (icons) + suggestion -->
-    <section class="filters" aria-label="Job Filters">
-      <div class="icon-bar" id="icon-bar" role="toolbar" aria-label="job categories">
-        <button class="icon-btn active" data-cat="All" aria-pressed="true"><span class="icon-emoji">🔎</span><span>All</span></button>
-        <button class="icon-btn" data-cat="IT"><span class="icon-emoji">💻</span><span>IT</span></button>
-        <button class="icon-btn" data-cat="Business"><span class="icon-emoji">💼</span><span>Business</span></button>
-        <button class="icon-btn" data-cat="Engineering"><span class="icon-emoji">⚙️</span><span>Engineering</span></button>
-        <button class="icon-btn" data-cat="Finance"><span class="icon-emoji">🧾</span><span>Finance</span></button>
-        <button class="icon-btn" data-cat="Design"><span class="icon-emoji">🎨</span><span>Design</span></button>
-      </div>
-      <div class="suggestion" id="suggestion">Auto-suggest based on completed courses: <strong id="suggest-cat">—</strong></div>
-    </section>
-
-    <!-- Controls: search + level + location -->
-    <section class="controls" aria-label="Search and filter controls">
-      <input id="search-input" class="search-input" type="text" placeholder="Search job title, company or location..." aria-label="Search jobs">
-      <div class="controls-right">
-        <select id="level-filter" aria-label="Filter by level">
-          <option value="Any">Any level</option>
-          <option value="Internship">Internship</option>
-          <option value="Junior">Junior</option>
-          <option value="Mid">Mid</option>
-        </select>
-        <select id="location-filter" aria-label="Filter by location">
-          <option value="Any">Any location</option>
-          <option value="Windhoek">Windhoek</option>
-          <option value="Remote">Remote</option>
-          <option value="Swakopmund">Swakopmund</option>
-        </select>
-      </div>
-    </section>
-
-    <!-- Results info -->
-    <section id="results-info" class="results-info" aria-live="polite">Loading jobs…</section>
-
-    <!-- Jobs grid -->
-    <section id="jobs-grid" class="jobs-grid" aria-live="polite"></section>
-
-    <!-- Pagination / Load More (simple) -->
-    <section style="text-align:center; margin-top:1.5rem;">
-      <button id="load-more" class="btn btn-primary">Load More Jobs →</button>
-    </section>
-  </main>
-
-  <!-- Employer/Admin form (toggleable) -->
-  <aside id="employer-form" class="employer-form" hidden>
-    <h3>Employer / Admin — Add Job</h3>
-    <form id="add-job-form">
-      <label>Job Title
-        <input id="job-title" type="text" required>
-      </label>
-      <label>Company
-        <input id="job-company" type="text" required>
-      </label>
-      <label>Category
-        <select id="job-category">
-          <option>IT</option><option>Business</option><option>Design</option><option>Engineering</option><option>Finance</option>
-        </select>
-      </label>
-      <label>Location
-        <input id="job-location" type="text" value="Windhoek">
-      </label>
-      <label>Level
-        <select id="job-level">
-          <option>Internship</option><option>Junior</option><option>Mid</option>
-        </select>
-      </label>
-      <label>Description
-        <textarea id="job-desc" rows="4"></textarea>
-      </label>
-
-      <div class="form-actions">
-        <button type="submit" class="btn btn-primary">Add Job</button>
-        <button id="close-employer" type="button" class="btn btn-secondary">Close</button>
-      </div>
-    </form>
-  </aside>
-
-  <!-- Toast container -->
-  <div id="toast-container" class="toast-container" aria-live="assertive" aria-atomic="true"></div>
+  <!-- Toast Notifications -->
+  <div class="toast-container" id="toastContainer"></div>
 
   <script src="../js/job-board.js"></script>
 </body>
