@@ -344,49 +344,233 @@
         </div>
     </div>
 
-    
-    <script>
-          
-        let currentStep = 1;
+   <script>
+let currentStep = 1;
 
-        function nextStep(step) {
-            // Simple step navigation - no validation for prototype
-            document.getElementById('step-' + currentStep).classList.remove('active');
-            document.getElementById('step-indicator-' + currentStep).classList.remove('active');
-            
-            currentStep = step;
-            
-            document.getElementById('step-' + currentStep).classList.add('active');
-            document.getElementById('step-indicator-' + currentStep).classList.add('active');
-        }
-
-        function previousStep(step) {
-            document.getElementById('step-' + currentStep).classList.remove('active');
-            document.getElementById('step-indicator-' + currentStep).classList.remove('active');
-            
-            currentStep = step;
-            
-            document.getElementById('step-' + currentStep).classList.add('active');
-            document.getElementById('step-indicator-' + currentStep).classList.add('active');
-        }
-function completeRegistration() {
-    console.log('Complete registration called');
-    alert('🎉 Registration Successful!\n\nWelcome to SkillLink Namibia!');
-            window.location.href = 'dashboard.html';
+function nextStep(step) {
+    // Validate current step before moving forward
+    if (!validateStep(currentStep)) {
+        return; // Stop if validation fails
     }
-        // Simple form submission for prototype
-       // Simple form submission for prototype
-document.getElementById('register-form').addEventListener('submit', function(e) {
-    e.preventDefault();
+
+    // Update UI
+    document.getElementById('step-' + currentStep).classList.remove('active');
+    document.getElementById('step-indicator-' + currentStep).classList.add('completed');
+    document.getElementById('step-indicator-' + currentStep).classList.remove('active');
+
+    currentStep = step;
+
+    document.getElementById('step-' + currentStep).classList.add('active');
+    document.getElementById('step-indicator-' + currentStep).classList.add('active');
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function previousStep(step) {
+    document.getElementById('step-' + currentStep).classList.remove('active');
+    document.getElementById('step-indicator-' + currentStep).classList.remove('active');
+
+    currentStep = step;
+
+    document.getElementById('step-' + currentStep).classList.add('active');
+    document.getElementById('step-indicator-' + currentStep).classList.add('active');
+    document.getElementById('step-indicator-' + currentStep).classList.remove('completed');
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function validateStep(step) {
+    if (step === 1) {
+        return validateStep1();
+    } else if (step === 2) {
+        return validateStep2();
+    } else if (step === 3) {
+        return validateStep3();
+    }
+    return true;
+}
+
+function validateStep1() {
+    // Get field values
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirm-password').value;
+    const termsAccepted = document.getElementById('terms').checked;
+
+    // Check if name is empty
+    if (name === '') {
+        alert('Please enter your full name.');
+        document.getElementById('name').focus();
+        return false;
+    }
+
+    // Check if name is at least 2 characters
+    if (name.length < 2) {
+        alert('Name must be at least 2 characters long.');
+        document.getElementById('name').focus();
+        return false;
+    }
+
+    // Check if email is empty
+    if (email === '') {
+        alert('Please enter your email address.');
+        document.getElementById('email').focus();
+        return false;
+    }
+
+    // Check if email is valid format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        alert('Please enter a valid email address (e.g., name@example.com).');
+        document.getElementById('email').focus();
+        return false;
+    }
+
+    // Check if password is empty
+    if (password === '') {
+        alert('Please create a password.');
+        document.getElementById('password').focus();
+        return false;
+    }
+
+    // Check password strength (minimum 6 characters)
+    if (password.length < 6) {
+        alert('Password must be at least 6 characters long.');
+        document.getElementById('password').focus();
+        return false;
+    }
+
+    // Check if confirm password is empty
+    if (confirmPassword === '') {
+        alert('Please confirm your password.');
+        document.getElementById('confirm-password').focus();
+        return false;
+    }
+
+    // Check if passwords match
+    if (password !== confirmPassword) {
+        alert('Passwords do not match! Please make sure both passwords are the same.');
+        document.getElementById('confirm-password').focus();
+        document.getElementById('confirm-password').value = '';
+        return false;
+    }
+
+    // Check if terms are accepted
+    if (!termsAccepted) {
+        alert('You must agree to the Terms & Conditions to continue.');
+        document.getElementById('terms').focus();
+        return false;
+    }
+
+    return true;
+}
+
+function validateStep2() {
+    // Get field values
+    const institution = document.getElementById('institution').value;
+    const field = document.getElementById('field').value.trim();
+    const year = document.getElementById('year').value;
+    const statusChecked = document.querySelector('input[name="status"]:checked');
+
+    // Check if institution is selected
+    if (institution === '') {
+        alert('Please select your institution.');
+        document.getElementById('institution').focus();
+        return false;
+    }
+
+    // Check if field of study is empty
+    if (field === '') {
+        alert('Please enter your field of study.');
+        document.getElementById('field').focus();
+        return false;
+    }
+
+    // Check if field is at least 2 characters
+    if (field.length < 2) {
+        alert('Field of study must be at least 2 characters long.');
+        document.getElementById('field').focus();
+        return false;
+    }
+
+    // Check if graduation year is selected
+    if (year === '') {
+        alert('Please select your graduation year.');
+        document.getElementById('year').focus();
+        return false;
+    }
+
+    // Check if employment status is selected
+    if (!statusChecked) {
+        alert('Please select your current employment status.');
+        return false;
+    }
+
+    return true;
+}
+
+function validateStep3() {
+    // Check if at least one skill is selected
+    const selectedSkills = document.querySelectorAll('input[name="skills"]:checked');
     
-   
+    if (selectedSkills.length === 0) {
+        alert('Please select at least one skill you want to learn.');
+        return false;
+    }
+
+    return true;
+}
+
+function completeRegistration() {
+    // Validate step 3
+    if (!validateStep3()) {
+        return;
+    }
+
+    // Collect all form data
+    const userData = {
+        name: document.getElementById('name').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        institution: document.getElementById('institution').value,
+        field: document.getElementById('field').value.trim(),
+        graduationYear: document.getElementById('year').value,
+        status: document.querySelector('input[name="status"]:checked').value,
+        interests: Array.from(document.querySelectorAll('input[name="skills"]:checked')).map(cb => cb.value),
+        goals: document.getElementById('goals').value.trim()
+    };
+
+    // Store user data (mock - in real app would send to server)
+    sessionStorage.setItem('user', JSON.stringify(userData));
+    sessionStorage.setItem('isLoggedIn', 'true');
+
+    // Show success message
+    alert('Registration Successful!\n\nWelcome to SkillLink Namibia, ' + userData.name + '!');
     
+    // Redirect to dashboard
+    window.location.href = 'dashboard.html';
+}
+
+// Add real-time password match indicator (optional but nice)
+document.addEventListener('DOMContentLoaded', function() {
+    const password = document.getElementById('password');
+    const confirmPassword = document.getElementById('confirm-password');
+
+    if (confirmPassword) {
+        confirmPassword.addEventListener('input', function() {
+            if (confirmPassword.value === '') {
+                confirmPassword.style.borderColor = '#F3F4F6';
+            } else if (password.value === confirmPassword.value) {
+                confirmPassword.style.borderColor = '#10B981'; // Green
+            } else {
+                confirmPassword.style.borderColor = '#EF4444'; // Red
+            }
+        });
+    }
 });
-            
-    
-    </script>
+</script>
 </body>
 </html>
-    </script>
+
 </body>
 </html>
